@@ -1,0 +1,15 @@
+INSERT INTO department() 
+VALUES
+('agri_am_susl'Agribusiness Management' ,'agri_susl' ),
+
+('agri_ea_susl' ,'Export Agriculture' ,'agri_susl'),
+	
+('agri_lp_susl' ,'Livestock Production' ,'agri_susl'), 
+	
+('com_cis_susl' ,'Computing and Information Systems' ,'com_susl'), 
+	
+('com_ds_susl' ,'Data Science' ,'com_susl'), 
+	
+('com_se_susl' ,'Software Engineering' ,'com_susl'), 
+	
+('nr_app_susl' ,'Natural Resources' ,'app_susl' ,'https://www.sab.ac.lk/app/natural-resources');
