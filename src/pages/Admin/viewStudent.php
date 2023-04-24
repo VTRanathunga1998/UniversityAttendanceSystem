@@ -83,6 +83,9 @@
                       <div>
                         <h6 class="card-title text-center">'. $row["RegNum"] .'</h6>
                       </div>
+                      <div>
+                        <a  href="studentProfile.php?stdid='. $row['RegNum'] .'" class="btn btn-primary mt-3">View profile</a >
+                      </div>
                     </div>
                   </div>
                 </div>';

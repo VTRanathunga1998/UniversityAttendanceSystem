@@ -4,18 +4,18 @@
 
   include_once '../../../database.php';
 
-  if(isset($_GET['lecid'])){
-    $lecID = $_GET['lecid'];
-    $_SESSION['oldLecid'] = $lecID;
+  if(isset($_GET['stdid'])){
+    $stdID = $_GET['stdid'];
+    $_SESSION['oldStdid'] = $stdID;
 
-    $sql = "SELECT * FROM lecturer WHERE lecturerID = '$lecID'";
+    $sql = "SELECT * FROM student WHERE RegNum = '$stdID'";
 
     $result = mysqli_query($connect,$sql);
 
     if ($result->num_rows > 0) {
       $row=mysqli_fetch_assoc($result);
     }else{
-      header("Location:viewLecturer.php?showModal=true&status=unsuccess&message=Profile not found");
+      header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Profile not found");
       exit();
     }
   }
@@ -25,13 +25,13 @@
   define('BASE_DIR', '../../Components/');
 
   // Set page title
-  $page_title = "Lecturer profile";
+  $page_title = "Student profile";
 
   //Set the heading
   $head_title = "Dashboard";
 
   //Sub Title
-  $sub_title = "Lecturer profile";
+  $sub_title = "Student profile";
 
   $isDashboard = "active";
   
@@ -46,14 +46,15 @@
   justify-content:space-between;
 ">
   <div>
-    <a href="/UniversityAttendanceSystem/src/pages/Admin/viewLecturer.php" class="btn button-icon btn-primary-soft btn-icon-back" >
+    <a href="/UniversityAttendanceSystem/src/pages/Admin/viewStudent.php" class="btn button-icon btn-primary-soft btn-icon-back" >
       Back
     </a>
   </div>
 </div>
 
 <div class="row p-3 bg-white shadow rounded">
-  <div class="col-12 col-md-4 col-lg-4 lecturerProfile-left" style="
+  <!-- Student-Profile-Left -->
+  <div class="col-12 col-md-4 col-lg-4 studentProfile-left" style="
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -68,21 +69,21 @@
           echo $row['profilePic']; 
         }else{
           echo "../../Assets/images/profile.jpg";
-        }
-      
-      ?> width="200px" class="img-fluid" style="
+        } ?> 
+        class="img-fluid" width="200px" style="
         object-fit: cover;
       ">
     </div>
   </div>
-  <div class="col-12 col-md-8 col-lg-8 lecturerProfile-right ">
+  <!-- Student-Profile-Right -->
+  <div class="col-12 col-md-8 col-lg-8 studentProfile-right ">
     <div>
       <table class="table table-borderless">
         <tbody>
           <tr>
             <td class="col-3"><strong>Index Number</strong></td>
             <td class="col-2 text-center"><strong>:</strong></td>
-            <td class="col-7"><?php echo $row['lecturerID'] ?></td>
+            <td class="col-7"><?php echo $row['RegNum'] ?></td>
           </tr>
           <tr>
             <td class="col-3"><strong>Faculty</strong></td>
@@ -124,10 +125,10 @@
           gap:1rem;
         ">
           <div>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editLecturer">Edit</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editStudent">Edit</button>
           </div>
           <div>
-            <a href="?showModal=true&status=removeLecturer&lecid=<?php echo $lecID ?>" class="btn btn-danger">Remove</a>
+            <a href="?showModal=true&status=removeStudent&stdid=<?php echo $stdID ?>" class="btn btn-danger">Remove</a>
           </div>
         </div>
       </div>
@@ -140,14 +141,14 @@
 
 <?php
   include '../../Components/modal.php';
-  include '../../Components/modals/editLecturerProfile.php';
-  include '../../Components/modals/removeLecturerModal.php';
+  include '../../Components/modals/editStudentProfile.php';
+  include '../../Components/modals/removeStudentModal.php';
 
 
   include  BASE_DIR . 'footertop.php';
 ?>
 
-<script src="../../js/facultyAndDepartmentDropdownForEditLecturer.js"></script>
+<script src="../../js/facultyAndDepartmentDropdownForEditStudent.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -162,9 +163,9 @@
         setTimeout(function(){
         $('#success').modal('hide');
         }, 1000);
-    }else if(showModal === 'true' && status==='removeLecturer'){
+    }else if(showModal === 'true' && status==='removeStudent'){
       // show the modal popup
-      $('#removeLecturer').modal('show');
+      $('#removeStudent').modal('show');
     }
     });
 </script>

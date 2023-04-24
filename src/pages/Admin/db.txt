@@ -13,3 +13,94 @@ VALUES
 ('com_se_susl' ,'Software Engineering' ,'com_susl'), 
 	
 ('nr_app_susl' ,'Natural Resources' ,'app_susl' ,'https://www.sab.ac.lk/app/natural-resources');
+
+18APC3528	K.V.A.I. Ananda
+18APC3529	B.Prageeth Anushka
+18APC3530	H.K.H.P. Ariyasinghe 
+18APC3531	A.A.Y.Y. ATHAUDA
+18APC3533 	R.baheerathan 
+18APC3534	PNDM Bandara
+18APC3536	H.M.Charith Jayodya De Silva
+18APC3537	G.A.A. Deshan
+18APC3538	T.K.R.S.Dharmadasa
+18APC3539	W.D.P.Fernando
+18APC3540	G.chanuka lakmal 
+18APC3541	P.A.R. Geeminda 
+18APC3542	Iman.A.N.A
+18APC3543	S.Junoj
+18APC3544	P.D.W.Kariyawasam
+18APC3545	A.V.A. Nuwan Pradeep kumara
+18APC3546	A.A.R.Lakindu
+18APC3547	P.M.S.Madusankha
+18APC3548	M.S.P.G.C.S Manikbowa
+18APC3549	S.Mathusan
+18APC3550 	N.LORSHAN 
+18APC3551	S.Nilakshan
+18APC3552	C.K.nugekotuwa
+18APC3553	C S Pathirage
+18APC3554	G.A.S.Perera
+18APC3555	M.A.M.D Perera  
+18APC3576	E.Tharani
+18APC3585	M.I.Aaqila 
+18APC3586	D.K. Abeygunawardhana 
+18APC3588 	G I N Dabarera
+18APC3589	J.B.Roshini Niluka Dias
+18APC3590	H.S.K. Dilukshi
+18APC3591	Duleeaha G.R.
+18APC3592	E.A.T.D.Edirisinghe 
+18APC3593	P.W.Edirisuriya
+18APC3594 	SNW Fernando 
+18APC3596	H.M.C.C.Herath
+18APC3597	V.Kishomini 
+18APC3598	M.K.Kodithuwakku 
+18APC3599	K.A.Sarasi Yashodha Kulasooriya
+18APC3600	H.K.M.H.V.Kumara
+18APC3601	M.K. Mayuri Nadeesha Kumari
+18APC3603	K.Nirosana 
+18APC3604	P.U.N.Pathirana
+18APC3556	R.F.S.PERIES
+18APC3557	S. A. Dinujaya Pradeepitha
+18APC3558	RM supun nilakshana Rajaguru
+18APC3559	R.M.H.K.Ranasinghe 
+18APC3560	R.A.D.K Ranathunga 
+18APC3561	R.Viraj Tharuka
+18APC3562	R.M.S.D.Randeni 
+18APC3563	J.I. Randika
+18APC3564 	T.Raveesvan
+18APC3567	L.L.L. Samod
+18APC3566	S.L.M.Rukais
+18APC3568	R.M.T.SANDARUWAN
+18APC3569 	S.Saranyasarma
+18APC3570	W.W.N.C.Sathyanjana
+18APC3571	P.W.C.J.Senarathna 
+18APC3572	M.B.L.M Senevirathne
+18APC3573	K.Shanujan
+18APC3574	H.D Sooriyage 
+18APC3575	S.Sutharsan 
+18APC3577	K.Tharsan
+18APC3578	H.A.T.T.Thenuwara
+18APC3579 	K.Vithuran
+18APC3580	W.M.P.S.B.Wanigasekara  
+18APC3581	N.L.Warnamal
+18APC3582	W.M.C.M. Weerasekara 
+18APC3584	K. Yathuraj
+18APC3725	N.Venushan 
+18APC3605	W P K I Perera
+18APC3606	L.H. Kushani Nimanthika Prabodhani
+18APC3607	H.W.G.Rasangika
+18APC3608	R.M.Dinithi nayanamali rathnayaka
+18APC3609 	R.Anujah
+18APC3610	T.D.Rubasinghe
+18APC3611	S.M.T.D.Samarakoon
+18APC3612	S.Thanusha
+18APC3614	S.A.A. Subasinghe
+18APC3615	T.Thasitha
+18APC3616	G.D.Udayangani
+18APC3617	P.K.Madhushi Udeshika   
+18APC3618	W. A. Udeshika 
+18APC3619	W.A.D. Anupama Udeshani Wanigasooriya 
+18APC3620	WASY.Wanniarachchi  
+18APC3621	A.I Warnakulasooriya  
+18APC3622	H.T.Welagedara
+18APC3623	K.M.K.H. Wijesinghe
+

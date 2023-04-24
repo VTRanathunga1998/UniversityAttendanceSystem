@@ -20,6 +20,7 @@
     }
 
     unset($_SESSION['sessionID']);
+    session_destroy();
 
     header("Location:takeAttendance.php");
 ?>

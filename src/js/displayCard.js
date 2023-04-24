@@ -135,6 +135,11 @@ async function getLecturer(facID = null, depID = null) {
                   <div>
                     <h6 class="card-title text-center">${item.lecturerID}</h6>
                   </div>
+                  <div>
+                        <a  href="lecturerProfile.php?lecid=${
+                          item.lecturerID
+                        }" class="btn btn-primary mt-3">View profile</a >
+                  </div>
                 </div>
               </div>
             </div>

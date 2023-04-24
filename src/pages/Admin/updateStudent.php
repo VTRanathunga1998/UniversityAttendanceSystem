@@ -3,12 +3,19 @@
 session_start();
 
 include '../../../database.php';
-include '../../utils/nic_utils.php';
 
-if(isset($_POST['addStudent'])){
-    $stdID = $_POST['chooseStdID'];
+if(isset($_SESSION['oldStdid'])){
+    $preLecId = $_SESSION['oldStdid'];
+    unset($_SESSION['oldStdid']);
+} else {
+    header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Student not found");
+    exit();
+}
+
+if(isset($_POST['updateStudent'])){
+    $stdID = $_POST['chooseLecID'];
     $firstName = $_POST['chooseFirstName'];
-    $lasttName = $_POST['chooseLastName'];
+    $lastName = $_POST['chooseLastName'];
     $gender = $_POST['chooseGender'];
     $faculty = $_POST['chooseFac'];
     $department = $_POST['chooseDep'];
@@ -16,14 +23,14 @@ if(isset($_POST['addStudent'])){
     $email = $_POST['chooseMail'];
     $departmentName = '';
     $facultyName = '';
-    $batch = $_POST['chooseBatch'];
+    $batch = $_POSt['chooseBatch'];
     $role = "Student";
     if(isset($_POST['chooseMobile'])){
         $mobileNum = $_POST['chooseMobile'];
     }else{
         $mobileNum = '';
     }
-    $stdImage = '';
+    $lecImage = '';
 
     if (isset($_FILES['stdPic']) && $_FILES['stdPic']['error'] == 0) {
         // User has uploaded an image
@@ -39,7 +46,7 @@ if(isset($_POST['addStudent'])){
     
             if (move_uploaded_file($tempName, $uploadPath)) {
                 // Image has been successfully uploaded
-                $stdImage = $uploadPath;
+                $lecImage = $uploadPath;
             } else {
                 // Error uploading the image
                 header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Error uploading image");
@@ -55,8 +62,6 @@ if(isset($_POST['addStudent'])){
         header("Location:viewStudent.php?showModal=true&status=unsuccess&message=File error");
         exit();
     }
- 
-
 }
 
 $sql = "SELECT faculty.facName,department.depName FROM faculty INNER JOIN department ON department.facID = faculty.facID WHERE department.depID = ?";
@@ -74,38 +79,44 @@ try{
                 $facultyName = $row['facName'];
                 $departmentName = $row['depName']; 
 
-                $hashedPass = password_hash("@Abc123",PASSWORD_DEFAULT);
-
-                $sql = "INSERT INTO user(userName,password,role) VALUES(?,?,?)";
+                $sql = "UPDATE user SET userName=? WHERE userName=? AND role='Student' ";
                 try {
                     if ($stmt = mysqli_prepare($connect, $sql)) {
-
-                        mysqli_stmt_bind_param($stmt, "sss", $stdID, $hashedPass, $role);
+                        mysqli_stmt_bind_param($stmt, "ss", $stdID, $preLecId);
                         mysqli_stmt_execute($stmt);
+                
+                        // Close the statement and the database connection
+                        mysqli_stmt_close($stmt);
 
-                        $sql = "INSERT INTO student(RegNum, firstName, lastName, gender, nic, department, batch, faculty, email, mobileNum, userName, profilePic) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+                        $sql = "UPDATE student SET RegNum=?, firstName=?, lastName=?, gender=?, nic=?, department=?, faculty=?, email=?,batch=?, mobileNum=?, profilePic=? WHERE userName=?";
+
                         try {
                             if ($stmt = mysqli_prepare($connect, $sql)) {
-                                mysqli_stmt_bind_param($stmt, "ssssssssssss", $stdID, $firstName, $lasttName, $gender, $nic, $departmentName, $batch, $facultyName, $email, $mobileNum, $stdID, $stdImage);
+                                mysqli_stmt_bind_param($stmt, "ssssssssssss", $stdID, $firstName, $lastName, $gender, $nic, $departmentName, $facultyName, $email, $batch, $mobileNum, $lecImage, $stdID);
                                 mysqli_stmt_execute($stmt);
-
+                        
                                 // Close the statement and the database connection
                                 mysqli_stmt_close($stmt);
                                 mysqli_close($connect);
-
-                                header("Location:viewStudent.php?showModal=true&status=success&message=Student added successfully");
-                            }else {
+                        
+                                header("Location:viewStudent.php?showModal=true&status=success&message=Student updated successfully");
+                            } else {
                                 throw new Exception(mysqli_error($connect));
                             }
                         } catch (Exception $e) {
-                            header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Added unsuccess! " . $e->getMessage());
+                            header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Update unsuccessful! " . $e->getMessage());
                         }
-                    }else {
+                
+
+                    } else {
                         throw new Exception(mysqli_error($connect));
                     }
-                }catch (Exception $e) {
-                    header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Added unsuccess! " . $e->getMessage());
-                }    
+                } catch (Exception $e) {
+                    header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Update unsuccessful! " . $e->getMessage());
+                }
+
+                
+   
             }
         }else {
             throw new Exception(mysqli_error($connect));

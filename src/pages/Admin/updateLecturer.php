@@ -4,10 +4,18 @@ session_start();
 
 include '../../../database.php';
 
+if(isset($_SESSION['oldLecid'])){
+    $preLecId = $_SESSION['oldLecid'];
+    unset($_SESSION['oldLecid']);
+} else {
+    header("Location:viewLecturer.php?showModal=true&status=unsuccess&message=Lecturer not found");
+    exit();
+}
+
 if(isset($_POST['updateLecturer'])){
     $lecID = $_POST['chooseLecID'];
     $firstName = $_POST['chooseFirstName'];
-    $lasttName = $_POST['chooseLastName'];
+    $lastName = $_POST['chooseLastName'];
     $gender = $_POST['chooseGender'];
     $faculty = $_POST['chooseFac'];
     $department = $_POST['chooseDep'];
@@ -53,8 +61,6 @@ if(isset($_POST['updateLecturer'])){
         header("Location:viewLecturer.php?showModal=true&status=unsuccess&message=File error");
         exit();
     }
- 
-
 }
 
 $sql = "SELECT faculty.facName,department.depName FROM faculty INNER JOIN department ON department.facID = faculty.facID WHERE department.depID = ?";
@@ -72,24 +78,43 @@ try{
                 $facultyName = $row['facName'];
                 $departmentName = $row['depName']; 
 
-
-                $sql = "UPDATE lecturer SET firstName=?, lastName=?, gender=?, nic=?, department=?, faculty=?, email=?, mobileNum=?, userName=?, profilePic=? WHERE lecturerID=?";
+                $sql = "UPDATE user SET userName=? WHERE userName=?";
                 try {
                     if ($stmt = mysqli_prepare($connect, $sql)) {
-                        mysqli_stmt_bind_param($stmt, "sssssssssss", $firstName, $lasttName, $gender, $nic, $departmentName, $facultyName, $email, $mobileNum, $lecID, $lecImage, $lecID);
+                        mysqli_stmt_bind_param($stmt, "ss", $lecID, $preLecId);
                         mysqli_stmt_execute($stmt);
                 
                         // Close the statement and the database connection
                         mysqli_stmt_close($stmt);
-                        mysqli_close($connect);
+
+                        $sql = "UPDATE lecturer SET lecturerID=?, firstName=?, lastName=?, gender=?, nic=?, department=?, faculty=?, email=?, mobileNum=?, profilePic=? WHERE userName=?";
+
+                        try {
+                            if ($stmt = mysqli_prepare($connect, $sql)) {
+                                mysqli_stmt_bind_param($stmt, "sssssssssss", $lecID, $firstName, $lastName, $gender, $nic, $departmentName, $facultyName, $email, $mobileNum, $lecImage, $lecID);
+                                mysqli_stmt_execute($stmt);
+                        
+                                // Close the statement and the database connection
+                                mysqli_stmt_close($stmt);
+                                mysqli_close($connect);
+                        
+                                header("Location:viewLecturer.php?showModal=true&status=success&message=Lecturer updated successfully");
+                            } else {
+                                throw new Exception(mysqli_error($connect));
+                            }
+                        } catch (Exception $e) {
+                            header("Location:viewLecturer.php?showModal=true&status=unsuccess&message=Update unsuccessful! " . $e->getMessage());
+                        }
                 
-                        header("Location:viewLecturer.php?showModal=true&status=success&message=Lecturer updated successfully");
+
                     } else {
                         throw new Exception(mysqli_error($connect));
                     }
                 } catch (Exception $e) {
                     header("Location:viewLecturer.php?showModal=true&status=unsuccess&message=Update unsuccessful! " . $e->getMessage());
                 }
+
+                
    
             }
         }else {

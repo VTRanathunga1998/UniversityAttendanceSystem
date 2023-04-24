@@ -1,5 +1,5 @@
 <!-- Modal for Edit lecturer profile-->
-<div class="modal fade" id="editLecturer" tabindex="-1" aria-labelledby="addLecturerModalLabel" aria-hidden="true">
+<div class="modal fade" id="editStudent" tabindex="-1" aria-labelledby="UpdateStudentModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg modal-dialog-scrollable">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -7,11 +7,11 @@
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-			<form action="updateLecturer.php" method="POST" enctype="multipart/form-data" >		
+			<form action="updateStudent.php" method="POST" enctype="multipart/form-data" >		
 
 				<div class="mb-3">
-					<label  class="form-label">Lecturer ID</label>
-					<input type="text" class="form-control" name="chooseLecID" value=<?php echo $row['lecturerID'] ?> id="" required>
+					<label  class="form-label">Student ID</label>
+					<input type="text" class="form-control" name="chooseLecID" value=<?php echo $row['RegNum'] ?> id="" required>
 				</div>
 
 				<div class="mb-3">
@@ -42,14 +42,21 @@
                 <div class="mb-3" id="faculty_div">
 					<label class="form-label">Faculty</label>
 					<div class="frm-select" >             
-						<select id="facultyDropdownEditLecturer" class="form-control" name="chooseFac" required></select>
+						<select id="facultyDropdownEditStudent" class="form-control" name="chooseFac" required></select>
 					</div>
 				</div>
 
 				<div class="mb-3" id="department_div">
 					<label class="form-label">Department</label>
 					<div class="frm-select" >              
-						<select id="departmentDropdownEditLecturer" class="form-control" name="chooseDep"required></select>
+						<select id="departmentDropdownEditStudent" class="form-control" name="chooseDep"required></select>
+					</div>
+				</div>
+
+                <div class="mb-3" id="batch_div">
+					<label class="form-label">Batch</label>
+					<div class="frm-select" >              
+						<select id="batchDropdownEditStudent" class="form-control" name="chooseBatch"required></select>
 					</div>
 				</div>
 
@@ -65,12 +72,12 @@
 
                 <div class="mb-3">
 					<label  class="form-label">Profile Picture</label>
-					<input type="file" class="form-control" name="lecPic" id="lecPic" >
+					<input type="file" class="form-control" name="stdPic" id="stdPic" >
 				</div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" name="updateLecturer" class="btn btn-primary">Update</button>
+					<button type="submit" name="updateStudent" class="btn btn-primary">Update</button>
 				</div>
 
 			</form>		
