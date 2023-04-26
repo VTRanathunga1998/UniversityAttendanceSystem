@@ -41,10 +41,6 @@ if(isset($_POST['addDepartment'])){
             exit();
         }
     }
-
-
-  
-
 }
 
 $sql = "INSERT INTO department(depID, depName, facID, depPic, depURL) VALUES(?,?,?,?,?)";

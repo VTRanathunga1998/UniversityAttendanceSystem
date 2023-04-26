@@ -3,7 +3,6 @@
 session_start();
 
 include '../../../database.php';
-include '../../utils/nic_utils.php';
 
 if(isset($_POST['addStudent'])){
     $stdID = $_POST['chooseStdID'];

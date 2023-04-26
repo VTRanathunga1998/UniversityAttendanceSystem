@@ -167,6 +167,7 @@
 </div>
 
 <?php include '../../Components/modal.php'; ?> 
+<?php include '../../Components/Modals/sessionViewModal.php'; ?> 
 
 <?php include  BASE_DIR . 'footertop.php'; ?>
 

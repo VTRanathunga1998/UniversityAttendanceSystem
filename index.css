@@ -48,14 +48,14 @@ body {
   overflow-x: hidden;
 }
 
-body.dark h1,
-body.dark h2,
-body.dark h2,
-body.dark h4,
-body.dark h5,
-body.dark h6,
-body.dark p,
-body.dark span {
+body.dark > h1,
+body.dark > h2,
+body.dark > h2,
+body.dark > h4,
+body.dark > h5,
+body.dark > h6,
+body.dark > p,
+body.dark > span {
   color: white;
 }
 

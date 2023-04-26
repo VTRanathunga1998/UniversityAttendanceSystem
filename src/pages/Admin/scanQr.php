@@ -144,6 +144,7 @@
 </div>    
 
 <?php include BASE_DIR . 'modal.php'; ?>
+<?php include BASE_DIR . 'Modals/endClassModal.php'; ?>
 <?php include BASE_DIR . 'footertop.php'; ?>
 
 <script>

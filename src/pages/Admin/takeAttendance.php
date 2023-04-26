@@ -157,6 +157,7 @@
   </div>
 
 <?php include '../../Components/modal.php'; ?> 
+<?php include '../../Components/Modals/sessionViewModal.php'; ?> 
 
 
 <?php
@@ -173,6 +174,20 @@
   $(document).ready(function () {
   $("#session_table").DataTable();
 });
+</script>
+
+<script>
+    $(document).ready(function(){
+    // check if the "showModal" parameter is present in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const showModal = urlParams.get('showModal');
+    const status = urlParams.get('status');
+    if (showModal === 'true' && status==='sessionView') {
+        // show the modal popup
+        $('#sessionView').modal('show');
+
+    }
+    });
 </script>
 
 
