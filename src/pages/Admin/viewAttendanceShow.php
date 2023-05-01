@@ -69,6 +69,9 @@
 
                   $session_result = mysqli_fetch_array($result_set);
               }
+          } else{
+            header("Location:viewAttendance.php?showModal=true&status=unsuccess&message=Data not found");
+            exit();
           }
       }
     }catch (mysqli_sql_exception $e) {
@@ -101,7 +104,7 @@
 
 <div class="mb-3 action-bar">
   <div>
-    <button type="button" class="btn btn-primary button-icon" data-bs-toggle="modal" data-bs-target="#viewClass" style="background-image: url('../../Assets/images/icons/add.svg');"> 
+    <button type="button" class="btn btn-primary button-icon me-3" data-bs-toggle="modal" data-bs-target="#viewClass" style="background-image: url('../../Assets/images/icons/add.svg');"> 
         Select class
     </button>
   </div>

@@ -37,7 +37,7 @@
 
 <div class="session-table">
     <!-- Table -->
-    <table class="table table-light table-hover" id="session_table" style="width:100%">
+    <table class="table table-light table-hover" id="session_table" style="width:50%">
             <thead>
             <tr>
                 <th scope="col">Batch</th>
@@ -47,17 +47,17 @@
             <tbody>
             <?php
                 try{
-                $sql = "SELECT * FROM session";
+                $sql = "SELECT * FROM batch";
                 $result = mysqli_query($connect,$sql);
                 while($row=$result->fetch_assoc()){
             ?>    
                 <tr>
-                    <td><?php echo 'a' ?></td>
-                    <td>
+                    <td><?php echo $row['batch'] ?></td>
+                    <td align="center">
                     <a 
-                        href="?showModal=true"  
+                        href="removeBatch.php?batch=<?php echo $row['batch'] ?>"  
                         type="button" 
-                        class="btn btn-primary-soft button-icon btn-icon-view" 
+                        class="btn btn-primary-soft button-icon btn-icon-remove" 
                         style="padding-top: 12px;padding-bottom: 12px;"
                     > 
                         Remove
@@ -81,8 +81,6 @@
   include  BASE_DIR . 'footertop.php';
 ?>
 
-<script src="/UniversityAttendanceSystem/src/js/displayCard.js"></script>
-<script src="/UniversityAttendanceSystem/src/js/facultyAndDepartmentDropdownForAddBatch.js"></script>
 <script>
     $(document).ready(function(){
     // check if the "showModal" parameter is present in the URL
@@ -96,21 +94,23 @@
         setTimeout(function(){
         $('#success').modal('hide');
         }, 1000);
-    }else if (showModal === 'true' && status==='viewBatch') {
-        // show the modal popup
-        $('#studentProfile').modal('show');
     }
     });
 </script>
 
-<!-- Scripts for DataTables -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script>
-  $(document).ready(function () {
-  $("#session_table").DataTable();
-});
+    function checkYear(input) {
+      var year1 = parseInt(input.value.slice(0, 4));
+      var year2 = parseInt(input.value.slice(5));
+      
+      if (year2 !== year1 + 1) {
+        input.setCustomValidity("Second year must be the next year after the first year");
+      } else {
+        input.setCustomValidity("");
+      }
+    }
 </script>
+
 
 <?php
   include  BASE_DIR . 'footer.php';

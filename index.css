@@ -455,6 +455,23 @@ body.dark > span {
   transform: scale(1.05);
 }
 
+/*DASHBOARD - VIEW SUBJECT*/
+.btn-icon-edit {
+  background-image: url(src/Assets/images/icons/edit-iceblue.svg);
+}
+
+.btn-icon-edit:hover {
+  background-image: url(src/Assets/images/icons/edit-white.svg);
+}
+
+.btn-icon-remove {
+  background-image: url(src/Assets/images/icons/delete-iceblue.svg);
+}
+
+.btn-icon-remove:hover {
+  background-image: url(src/Assets/images/icons/delete-white.svg);
+}
+
 /*------------------------------------------------- 
 --------------------END DASHBOARD------------------
 -------------------------------------------------*/

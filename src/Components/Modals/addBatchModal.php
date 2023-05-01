@@ -10,7 +10,7 @@
 			<form action="addBatch.php" method="POST" enctype="multipart/form-data">									
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Batch</label>
-                    <input type="text" class="form-control" name = "chooseBatch">
+                    <input class="form-control" name="Batch" type="text" pattern="\d{2}/\d{2}" required>
                 </div>
                 <div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -34,11 +34,6 @@
   </div>
 </div>
 
-<!-- Select faculty -->
-<?php include '../../Components/facultyDropdown.php' ?>
-
-<!-- Select department -->
-<?php include '../../Components/departmentDropdown.php' ?>
 
 <div class="session-table">
     <!-- Table -->
@@ -46,8 +41,8 @@
             <thead>
             <tr>
                 <th scope="col">Subject code</th>
-                <th scope="col">Faculty</th>
                 <th scope="col">Subject name</th>
+                <th scope="col">Faculty</th>
                 <th scope="col">Department</th>
                 <th scope="col">Events</th>
             </tr>
@@ -55,24 +50,38 @@
             <tbody>
             <?php
                 try{
-                $sql = "SELECT * FROM session";
+                $sql = "SELECT s.subCode, s.subName, d.depName, f.facName
+                        FROM Subject s
+                        JOIN Department d ON s.depID = d.depID
+                        JOIN Faculty f ON d.facID = f.facID";
                 $result = mysqli_query($connect,$sql);
                 while($row=$result->fetch_assoc()){
+                  
             ?>    
                 <tr>
-                    <td><?php echo 'a' ?></td>
-                    <td><?php echo 'b' ?></td>
-                    <td><?php echo 'c' ?></td>
-                    <td><?php echo 'd' ?></td>   
+                    <td><?php echo $row['subCode'] ?></td>
+                    <td><?php echo $row['subName'] ?></td>   
+                    <td><?php echo $row['facName'] ?></td>
+                    <td><?php echo $row['depName'] ?></td>
                     <td>
-                    <a 
-                        href="?showModal=true"  
-                        type="button" 
-                        class="btn btn-primary-soft button-icon btn-icon-view" 
-                        style="padding-top: 12px;padding-bottom: 12px;"
-                    > 
-                        View
-                    </a>
+                      <div style="display:flex;justify-content:center;gap:1rem;">
+                        <a 
+                            href="?showModal=true&subCode=<?php echo $row['subCode'] ?>&subName=<?php echo $row['subName'] ?>&status=editSubject"  
+                            type="button" 
+                            class="btn btn-primary-soft button-icon btn-icon-edit" 
+                            style="padding-top: 12px;padding-bottom: 12px;"
+                        > 
+                            Edit
+                        </a>
+                        <a 
+                            href="?showModal=true&subCode=<?php echo $row['subCode'] ?>&status=removeSubject"  
+                            type="button" 
+                            class="btn btn-primary-soft button-icon btn-icon-remove" 
+                            style="padding-top: 12px;padding-bottom: 12px;"
+                        > 
+                            Remove
+                        </a>
+                      </div>
                     </td>
                 </tr>       
             <?php    
@@ -91,11 +100,14 @@
 <?php
   include '../../Components/modal.php';
   include '../../Components/Modals/addSubjectModal.php';
+  include '../../Components/Modals/editSubjectModal.php';
+  include '../../Components/Modals/removeSubjectModal.php';
   include  BASE_DIR . 'footertop.php';
 ?>
 
 <script src="/UniversityAttendanceSystem/src/js/displayCard.js"></script>
 <script src="/UniversityAttendanceSystem/src/js/facultyAndDepartmentDropdownForAddSubject.js"></script>
+<script src="/UniversityAttendanceSystem/src/js/facultyAndDepartmentDropdownForEditSubject.js"></script>
 <script>
     $(document).ready(function(){
     // check if the "showModal" parameter is present in the URL
@@ -112,6 +124,12 @@
     }else if (showModal === 'true' && status==='viewSubject') {
         // show the modal popup
         $('#studentProfile').modal('show');
+    }else if(showModal === 'true' && status==='editSubject'){
+         // show the modal popup
+         $('#editSubject').modal('show');
+    }else if(showModal === 'true' && status==='removeSubject'){
+        // show the modal popup
+        $('#removeSubject').modal('show');
     }
     });
 </script>
@@ -124,6 +142,7 @@
   $("#session_table").DataTable();
 });
 </script>
+
 
 <?php
   include  BASE_DIR . 'footer.php';

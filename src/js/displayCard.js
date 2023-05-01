@@ -175,7 +175,7 @@ async function getStudent(facID = null, depID = null) {
     // Create the card HTML structure
     var cardHtml = `
                 <div>
-                  <div class="card mb-3 h-100 shadow lecturer-card" style="border:none; ">
+                  <div class="card mb-3 h-100 shadow student-card" style="border:none; ">
                   <img
                     class="img-fluid mx-auto d-block"
                     src=${item.profilePic}
@@ -197,7 +197,10 @@ async function getStudent(facID = null, depID = null) {
                       </div> 
                       <div>
                         <h6 class="card-title text-center">${item.RegNum}</h6>
-                      </div>      
+                      </div> 
+                      <div>
+                        <a  href="studentProfile.php?stdid=${item.RegNum}" class="btn btn-primary mt-3">View profile</a >
+                      </div>     
                     </div>
                   </div>
                 </div>
