@@ -122,9 +122,6 @@
         setTimeout(function(){
         $('#success').modal('hide');
         }, 1000);
-    }else if (showModal === 'true' && status==='viewStudent') {
-        // show the modal popup
-        $('#studentProfile').modal('show');
     }
     });
 </script>

@@ -3,6 +3,7 @@ var department_dropdown = document.getElementById("departmentdrop");
 var card = document.getElementById("department-card");
 var studentcard = document.getElementById("student-card");
 var lecturercard = document.getElementById("lecturer-card");
+var adminCard = document.getElementById("admin-card");
 
 async function getFaculty() {
   var response = await fetch(
@@ -152,6 +153,79 @@ async function getLecturer(facID = null, depID = null) {
     lecturercard.appendChild(card);
   });
 }
+
+//Get Admin
+async function getAdmin(facID = null, depID = null) {
+  var url =
+    "http://localhost/UniversityAttendanceSystem/api_data.php?type=admin";
+
+  if (facID !== null && depID !== null) {
+    url += "&facID=" + facID + "&depID=" + depID;
+  } else if (facID !== null) {
+    url += "&facID=" + facID;
+  } else if (depID !== null) {
+    url += "&depID=" + depID;
+  }
+
+  var response = await fetch(url);
+
+  var json_data = await response.json();
+
+  console.log(json_data);
+
+  json_data.forEach((item) => {
+    var card = document.createElement("div");
+
+    // Create the card HTML structure
+    var cardHtml = `
+            <div>
+              <div class="card mb-3 h-100 shadow admin-card" style="border:none;">
+              <img
+              class="img-fluid mx-auto d-block"
+              src=${
+                item.profilePic
+                  ? item.profilePic
+                  : "/UniversityAttendanceSystem/src/Assets/images/profile.jpg"
+              }
+              alt="PROFILE PICTURE"
+              style="
+                width: 100px !important;
+                height: 100px !important;
+                border-radius: 50%;
+                transition: all 0.3s;
+                margin: auto;
+                margin-top: 1rem;
+              "
+            />
+                <div class="card-body" 
+                  style="display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden"
+                >
+                  <div> 
+                    <h5 class="card-title text-center">${item.firstName} ${
+      item.lastName
+    }</h5>      
+                  </div> 
+                  <div>
+                    <h6 class="card-title text-center">${item.adminID}</h6>
+                  </div>
+                  <div>
+                        <a  href="adminProfile.php?adminid=${
+                          item.adminID
+                        }" class="btn btn-primary mt-3">View profile</a >
+                  </div>
+                </div>
+              </div>
+            </div>
+    `;
+
+    // Set the HTML content of the card element to the cardHtml string
+    card.innerHTML = cardHtml;
+
+    // Append the card element to the parent element
+    adminCard.appendChild(card);
+  });
+}
+
 //Get Student
 async function getStudent(facID = null, depID = null) {
   var url =
@@ -246,6 +320,14 @@ function clearLecturer(lecturercard) {
   }
 }
 
+//clear lecturer card
+function clearAdmin(adminCard) {
+  if (adminCard !== null) {
+    // card is set
+    adminCard.innerHTML = ""; // set the innerHTML of the parent node to an empty string
+  }
+}
+
 $(document).ready(function () {
   getFaculty();
   $("#facultydrop").change(function () {
@@ -265,6 +347,13 @@ $(document).ready(function () {
       var facName =
         faculty_dropdown.options[faculty_dropdown.selectedIndex].innerHTML;
       getStudent(facName);
+    }
+
+    if (adminCard !== null) {
+      clearAdmin(adminCard);
+      var facName =
+        faculty_dropdown.options[faculty_dropdown.selectedIndex].innerHTML;
+      getAdmin(facName);
     }
   });
 
@@ -291,6 +380,18 @@ $(document).ready(function () {
         faculty_dropdown.options[faculty_dropdown.selectedIndex].innerHTML;
 
       getStudent(facID, depID);
+    }
+
+    if (adminCard !== null) {
+      clearAdmin(adminCard);
+
+      let depID =
+        department_dropdown.options[department_dropdown.selectedIndex]
+          .innerHTML;
+      let facID =
+        faculty_dropdown.options[faculty_dropdown.selectedIndex].innerHTML;
+
+      getAdmin(facID, depID);
     }
   });
 });

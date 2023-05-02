@@ -11,32 +11,32 @@
 
 				<div class="mb-3">
 					<label  class="form-label">Lecturer ID</label>
-					<input type="text" class="form-control" name="chooseLecID" value=<?php echo $row['lecturerID'] ?> id="" required>
+					<input type="text" class="form-control" name="chooseLecID" value="<?php echo $row['lecturerID'] ?>" id="" required>
 				</div>
 
 				<div class="mb-3">
 					<label  class="form-label">First Name</label>
-					<input type="text" class="form-control" name="chooseFirstName" value=<?php echo $row['firstName'] ?> id="" pattern="[A-Za-z ]{3,}" title="only letters" required>
+					<input type="text" class="form-control" name="chooseFirstName" value="<?php echo $row['firstName'] ?>" id="" pattern="[A-Za-z ]{3,}" title="only letters" required>
 				</div>
 
 				<div class="mb-3">
 					<label  class="form-label">Last Name</label>
-					<input type="text" class="form-control" name="chooseLastName" value=<?php echo $row['lastName'] ?> id="" pattern="[A-Za-z ]{3,}" title="only letters" required>
+					<input type="text" class="form-control" name="chooseLastName" value="<?php echo $row['lastName'] ?>" id="" pattern="[A-Za-z ]{3,}" title="only letters" required>
 				</div>
 
 				<div class="mb-3">
 					<label  class="form-label">NIC</label>
-					<input type="text" name="chooseNIC" class="form-control" value=<?php echo $row['nic'] ?> id="">
+					<input type="text" name="chooseNIC" class="form-control" value="<?php echo $row['nic'] ?>" id="">
 				</div>
 
 				<div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="chooseMail" value=<?php echo $row['email'] ?> id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" name="chooseMail" value="<?php echo $row['email'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
 
 				<div class="mb-3">
 					<label  class="form-label">Mobile Number</label>
-					<input type="text" name="chooseMobile" class="form-control" value=<?php echo $row['mobileNum'] ?> id="" pattern="[0-9]{10}">
+					<input type="text" name="chooseMobile" class="form-control" value="<?php echo $row['mobileNum'] ?>" id="" pattern="[0-9]{10}">
 				</div>
 
                 <div class="mb-3" id="faculty_div">

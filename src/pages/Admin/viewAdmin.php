@@ -40,7 +40,7 @@
 <!-- Select department -->
 <?php include '../../Components/departmentDropdown.php' ?>
 
-<!-- Department card -->
+<!-- Admin card -->
 <div class="row row-cols-1 row-cols-md-3  g-4" id="admin-card">
   <?php 
     try{

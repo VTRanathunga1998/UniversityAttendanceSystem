@@ -455,6 +455,15 @@ body.dark > span {
   transform: scale(1.05);
 }
 
+/*DASHBOARD - VIEW STUDENT*/
+.admin-card {
+  transition: all 0.5s;
+}
+
+.admin-card:hover {
+  transform: scale(1.05);
+}
+
 /*DASHBOARD - VIEW SUBJECT*/
 .btn-icon-edit {
   background-image: url(src/Assets/images/icons/edit-iceblue.svg);

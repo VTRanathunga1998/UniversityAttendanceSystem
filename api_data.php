@@ -185,6 +185,50 @@
         }
     }
 
+    // Get Admin
+    function getAdmin($facID = NULL , $depID = NULL){
+
+        if($depID==NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM admin WHERE faculty='$facID'");
+            $all_data = array();
+
+            while($row=mysqli_fetch_assoc(($query))){
+                // array_push($all_data,$row);
+                // $profile_picture = null;
+                // if (!empty($row['profilePic'])) {
+                //     $profile_picture = file_get_contents($row['profilePic']);
+                //     $profile_picture = base64_encode($profile_picture);
+                // }
+                // $row['profilePic'] = $profile_picture;
+                $all_data[] = $row;
+            }
+
+            
+            return $all_data;
+
+        } else {
+
+                $sql = "SELECT * FROM admin WHERE faculty='$facID' AND department='$depID'";
+                $query = mysqli_query($GLOBALS['connect'],$sql);
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    // $profile_picture = null;
+                    // if (!empty($row['profilePic'])) {
+                    //     $profile_picture = file_get_contents($row['profilePic']);
+                    //     $profile_picture = base64_encode($profile_picture);
+                    // }
+                    // $row['profilePic'] = $profile_picture;
+                    $all_data[] = $row;
+                }
+    
+                
+                return $all_data;
+    
+        }
+    }
+
    
     if(isset($_REQUEST['type'])){
         if($_REQUEST['type']=="department"){
@@ -212,6 +256,15 @@
                 echo json_encode(getStudent($_REQUEST['facID']));
             } else if (isset($_REQUEST['depID'])) {
                 echo json_encode(getStudent(null, $_REQUEST['depID']));
+            }
+        }
+        else if($_REQUEST['type']=="admin"){
+            if (isset($_REQUEST['facID']) && isset($_REQUEST['depID'])) {
+                echo json_encode(getAdmin($_REQUEST['facID'], $_REQUEST['depID']));
+            } else if (isset($_REQUEST['facID'])) {
+                echo json_encode(getAdmin($_REQUEST['facID']));
+            } else if (isset($_REQUEST['depID'])) {
+                echo json_encode(getAdmin(null, $_REQUEST['depID']));
             }
         }
         

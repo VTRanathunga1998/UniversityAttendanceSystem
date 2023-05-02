@@ -53,7 +53,7 @@
             ?>    
                 <tr>
                     <td><?php echo $row['batch'] ?></td>
-                    <td align="center">
+                    <td>
                     <a 
                         href="removeBatch.php?batch=<?php echo $row['batch'] ?>"  
                         type="button" 
