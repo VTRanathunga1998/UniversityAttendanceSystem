@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- Boxicons -->
-	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 	<!-- Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -46,7 +46,7 @@
 			</li>
 			<li class=<?php if(isset($isTakeattendance)){echo "$isTakeattendance";} ?>>
 				<a href="/UniversityAttendanceSystem/src/pages/Admin/takeAttendance.php">
-					<i class='bx bxs-shopping-bag-alt' ></i>
+					<i class='bx bx-scan'></i>
 					<span class="text">Take attendance</span>
 				</a>
 			</li>
@@ -77,7 +77,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="/UniversityAttendanceSystem" class="logout">
+				<a href="/UniversityAttendanceSystem/logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>

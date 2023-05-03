@@ -19,13 +19,3 @@ function is_password_strong($password) {
     }
     return true;
 }
-
-
-// include 'password_utils.php';
-
-// $password = "myPassword123";
-// if (is_password_strong($password)) {
-//     echo "Password is strong.";
-// } else {
-//     echo "Password is weak.";
-// }
