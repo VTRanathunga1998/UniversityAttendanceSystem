@@ -4,15 +4,15 @@
   include_once '../../../database.php';
 
   // Set page title
-  $page_title = "Dashboard";
+  $page_title = "Setting";
 
   //Set the heading
-  $head_title = "Dashboard";
+  $head_title = "Setting";
 
   //Sub Title
   $sub_title = "View department";
 
-  $isDashboard = "active";
+  $isSetting = "active";
   
   include BASE_DIR . 'header.php';
 ?>
@@ -25,7 +25,7 @@
   justify-content:space-between;
 ">
   <div>
-    <a href="/UniversityAttendanceSystem/src/pages/Admin/admin.php" class="btn button-icon btn-primary-soft btn-icon-back" >
+    <a href="/UniversityAttendanceSystem/src/pages/Admin/Setting.php" class="btn button-icon btn-primary-soft btn-icon-back" >
       Back
     </a>
   </div>

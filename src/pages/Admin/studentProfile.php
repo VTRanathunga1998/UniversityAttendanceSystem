@@ -28,12 +28,12 @@
   $page_title = "Student profile";
 
   //Set the heading
-  $head_title = "Dashboard";
+  $head_title = "Setting";
 
   //Sub Title
   $sub_title = "Student profile";
 
-  $isDashboard = "active";
+  $isSetting = "active";
   
   include BASE_DIR . 'header.php';
 ?>

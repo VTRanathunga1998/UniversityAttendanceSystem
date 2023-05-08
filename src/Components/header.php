@@ -12,6 +12,9 @@
 	<!-- Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
+	<!-- Chart.js -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 	<link
       rel="stylesheet"
       href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"
@@ -56,21 +59,10 @@
 					<span class="text">View attendance</span>
 				</a>
 			</li>
-			<li class=<?php if(isset($isMessage)){echo "$isMessage";} ?>>
-				<a href="#">
-					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Message</span>
-				</a>
-			</li>
-			<li class=<?php if(isset($isTeam)){echo "$isTeam";} ?>>
-				<a href="#">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
-				</a>
-			</li>
+			
 		</ul>
 		<ul class="side-menu">
-			<li>
+			<li class=<?php if(isset($isSetting)){echo "$isSetting";} ?>>
 				<a href="/UniversityAttendanceSystem/src/pages/Admin/setting.php">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
@@ -102,7 +94,7 @@
 			</form>
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
+			<a href="#" class="notification" hidden>
 				<i class='bx bxs-bell' ></i>
 				<span class="num">8</span>
 			</a>

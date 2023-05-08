@@ -8,6 +8,8 @@
 
   try{
 
+    $today = date('Y-m-d');
+
     $queryFacultyCount = "SELECT COUNT(facID) as facultyCount FROM faculty;";
     $queryDepartmentCount = "SELECT COUNT(depID) as departmentCount FROM department;";
     $queryLecturerCount = "SELECT COUNT(lecturerID) as lecturerCount FROM lecturer;";
@@ -15,6 +17,7 @@
     $querySubjectCount = "SELECT COUNT(subCode) as subjectCount FROM subject;";
     $queryBatchCount = "SELECT COUNT(batch) as batchCount FROM batch;";
     $queryAdminCount = "SELECT COUNT(adminID) as adminCount FROM admin;";
+    $queryClassCount = "SELECT COUNT(sessionID) as classCount FROM session WHERE date='$today';";
 
     $queryFacultyCountResult = mysqli_fetch_array(mysqli_query($connect,$queryFacultyCount));
     $queryDepartmentCountResult = mysqli_fetch_array(mysqli_query($connect,$queryDepartmentCount));
@@ -23,6 +26,7 @@
     $querySubjectCountResult = mysqli_fetch_array(mysqli_query($connect,$querySubjectCount));
     $queryBatchCountResult = mysqli_fetch_array(mysqli_query($connect,$queryBatchCount));
     $queryAdminCountResult = mysqli_fetch_array(mysqli_query($connect,$queryAdminCount));
+    $queryClassCountResult = mysqli_fetch_array(mysqli_query($connect,$queryClassCount));
 
     $facultyCount = $queryFacultyCountResult['facultyCount'];
     $departmentCount = $queryDepartmentCountResult['departmentCount'];
@@ -31,6 +35,7 @@
     $subjectCount = $querySubjectCountResult['subjectCount'];
     $batchCount = $queryBatchCountResult['batchCount'];
     $adminCount = $queryAdminCountResult['adminCount'];
+    $classCount = $queryClassCountResult['classCount'];
 
   } catch(mysqli_sql_exception $e){
     header("Location:admin.php?showModal=true&status=unsuccess&message=Database error");
@@ -55,9 +60,19 @@
 
 <?php include BASE_DIR . 'header.php'; ?>
 
+<?php
+  // Fetch attendance count for each of the past 7 days
+  $query = "SELECT date(date) AS attendance_date, COUNT(*) AS attendance_count FROM session WHERE date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY attendance_date ORDER BY attendance_date ASC";
+  $result = mysqli_query($connect, $query);
 
+  // Store the attendance data in an array
+  $attendance_data = array();
+  while ($row = mysqli_fetch_assoc($result)) {
+      $attendance_data[$row['attendance_date']] = $row['attendance_count'];
+  }
+?>
 
-  <!-- Faculty card -->
+<!-- Faculty card -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-sm-2 g-4 insights">
   <div class="col">
     <div class="card h-100 shadow dash-card" data-clickable="true" data-href="/UniversityAttendanceSystem/src/pages/Admin/viewFaculty.php">
@@ -190,10 +205,31 @@
       </div>
     </div>
   </div>
+  
+  <!-- Class card -->
+  <div class="col">
+    <div class="card h-100 shadow dash-card" data-clickable="true" data-href="/UniversityAttendanceSystem/src/pages/Admin/viewAdmin.php">
+      <div class="card-body">
+        <div class="cb-left">
+        <div>
+          <h3 class="text-center"><?php echo $classCount; ?></h3>
+        </div>
+        <div>
+          <span class="text-center">Today classes</span>
+        </div>
+      </div>
+      <div class="cb-right">
+        <img src="/UniversityAttendanceSystem/src/Assets/images/classes.png" width="50px" alt="img">
+      </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
-
+<div>
+  <canvas class="bg-white rounded shadow mt-3" id="myChart"></canvas>
+</div>
 
 <?php
   include BASE_DIR . 'modal.php'; 
@@ -201,12 +237,50 @@
 ?>
 
 <script>
-  $(document).ready(() => {
-    $(document.body).on('click', '.card[data-clickable=true]', (e) => {
-      var href = $(e.currentTarget).data('href');
-      window.location = href;
+    // Retrieve the attendance data from PHP
+    var attendance_data = <?php echo json_encode($attendance_data); ?>;
+    
+    // Generate the labels and data for the chart
+    var labels = [];
+    var data = [];
+    for (var i = 6; i >= 0; i--) {
+        var date = new Date();
+        date.setDate(date.getDate() - i);
+        var formattedDate = date.toISOString().slice(0, 10);
+        labels.push(formattedDate);
+        if (attendance_data.hasOwnProperty(formattedDate)) {
+            data.push(attendance_data[formattedDate]);
+        } else {
+            data.push(0);
+        }
+    }
+    
+    // Create the chart
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Attendance of past seven days',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                data: data
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true,
+                    stepSize: 1,
+                    precision: 0
+                  }
+                }]
+            }
+        }
     });
-  });
 </script>
 
 <?php
