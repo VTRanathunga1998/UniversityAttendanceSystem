@@ -8,6 +8,10 @@
     if (showModal === 'true' && status==='unsuccess') {
         // show the modal popup
         $('#unsuccess').modal('show');
+
+        
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
         // hide the modal popup after 1 seconds
         setTimeout(function(){
         $('#unsuccess').modal('hide');

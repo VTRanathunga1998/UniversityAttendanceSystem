@@ -186,9 +186,13 @@
         // show the modal popup
         $('#sessionView').modal('show');
 
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
+
     }
     });
 </script>
+
 
 
 <?php

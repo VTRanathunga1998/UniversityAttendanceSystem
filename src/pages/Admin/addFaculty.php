@@ -8,8 +8,7 @@ if(isset($_POST['addFaculty'])){
     $facID = $_POST['facID'];
     $facName = $_POST['facName'];
 
-
-    $facImage = '';
+    $facImage = null;
 
     if (isset($_FILES['facPic']) && $_FILES['facPic']['error'] == 0) {
         // User has uploaded an image
@@ -36,9 +35,6 @@ if(isset($_POST['addFaculty'])){
             header("Location:viewFaculty.php?showModal=true&status=unsuccess&message=Invalid file type");
             exit();
         }
-    } else {
-        // Use the default image
-        $facImage = $defaultImage;
     }
 
     if(isset($_POST['facDesc'])){

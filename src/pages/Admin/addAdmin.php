@@ -21,7 +21,7 @@ if(isset($_POST['addAdmin'])){
     }else{
         $mobileNum = '';
     }
-    $adminImage = '';
+    $adminImage = null;
 
     if (isset($_FILES['adminPic']) && $_FILES['adminPic']['error'] == 0) {
         // User has uploaded an image
@@ -48,13 +48,7 @@ if(isset($_POST['addAdmin'])){
             header("Location:viewAdmin.php?showModal=true&status=unsuccess&message=Unsupported file type");
             exit();
         }
-    } else {
-        // File error
-        header("Location:viewAdmin.php?showModal=true&status=unsuccess&message=File error");
-        exit();
     }
- 
-
 }
 
 $sql = "SELECT faculty.facName,department.depName FROM faculty INNER JOIN department ON department.facID = faculty.facID WHERE department.depID = ?";

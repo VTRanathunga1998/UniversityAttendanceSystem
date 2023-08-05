@@ -122,6 +122,10 @@
     if (showModal === 'true' && status==='success') {
         // show the modal popup
         $('#success').modal('show');
+
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
+
         // hide the modal popup after 1 seconds
         setTimeout(function(){
         $('#success').modal('hide');
@@ -129,6 +133,7 @@
     }else if (showModal === 'true' && status==='viewLecturer') {
         // show the modal popup
         $('#lecturerProfile').modal('show');
+
     }
     });
 </script>

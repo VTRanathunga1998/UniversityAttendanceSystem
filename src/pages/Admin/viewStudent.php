@@ -54,7 +54,7 @@
       while($row = $result->fetch_assoc()) {
           // Display the data on Bootstrap cards
           
-        if(isset($row['profilePic'])){
+        if($row['profilePic'] !== null){
           $image_src = $row['profilePic'];
         }else{
           $image_src = "../../Assets/images/profile.jpg";
@@ -119,6 +119,10 @@
         // show the modal popup
         $('#success').modal('show');
         // hide the modal popup after 1 seconds
+
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
+
         setTimeout(function(){
         $('#success').modal('hide');
         }, 1000);

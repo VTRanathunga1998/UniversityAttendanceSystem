@@ -80,6 +80,7 @@
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#end_class">End class</button>       
         </form>
     </div>
+    <div class="scan-area"></div>
     <div class="student-details">
         <div class="card text-center student-card" style="width: 18rem; background-color:var(--grey); border:none;">
             
@@ -137,7 +138,14 @@
                         }
                     ?>
                 </p>
-                <a href="#" class="btn btn-primary">View profile</a>
+                <a 
+                    href="studentProfile.php?stdid=<?php 
+                                                        if(isset($_GET['id'])){
+                                                            echo $_GET['id'];
+                                                        }
+                                                    ?>" 
+                    class="btn btn-primary">View profile
+                </a>
             </div>
         </div>
     </div>
@@ -156,6 +164,9 @@
     if (showModal === 'true' && status==='success') {
         // show the modal popup
         $('#mark_attendance').modal('show');
+
+        window.history.replaceState({}, document.title, window.location.pathname);
+
         // hide the modal popup after 1 seconds
         setTimeout(function(){
         $('#mark_attendance').modal('hide');
@@ -175,6 +186,26 @@
 
 
 <script>
+    function requestCamera() {
+        // Request access to the camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                // Show the video stream
+                var video = document.getElementById('preview');
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function(error) {
+                // Show a prompt to the user if the access is denied or not granted
+                alert('Failed to access camera: ' + error.message);
+            });
+    }
+
+    // Call the requestCamera function when the page loads
+    window.addEventListener('load', function() {
+        requestCamera();
+    });
+    
     var scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
     
     Instascan.Camera.getCameras().then(function(cameras){
@@ -194,12 +225,9 @@
     });
 
     scanner.addListener('scan', function(c){
-
         document.getElementById('qrcode').value=c;
         // alert(document.getElementById('qrcode').textContent);
-        document.forms[1].submit();
-        
-
+        document.forms[1].submit();       
     });
 </script>
 

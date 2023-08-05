@@ -65,7 +65,7 @@
 
     ">
       <img src=<?php 
-        if($row['profilePic']){
+        if($row['profilePic'] !==null ){
           echo $row['profilePic']; 
         }else{
           echo "../../Assets/images/profile.jpg";
