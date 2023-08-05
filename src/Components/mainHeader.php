@@ -13,6 +13,10 @@
 
     <!-- Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="login.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
 
@@ -30,11 +34,9 @@
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                             <?php if(!isset($_SESSION['userName'])) : ?>
+                        
                                 <li class="nav-item">
-                                    <a class="nav-link <?php if(isset($page_title) && $page_title == 'Register') echo 'active'; ?>" href="register.php">Register</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link <?php if(isset($page_title) && $page_title == 'Login') echo 'active'; ?>" href="login.php">Login</a>
+                                    <a class="nav-link <?php if(isset($page_title) && $page_title == 'Login') echo 'active'; ?>" href="/UniversityAttendanceSystem/src/pages/Admin/login/login.php">Login</a>
                                 </li>
                             <?php endif ?>
 
