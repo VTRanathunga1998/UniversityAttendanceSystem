@@ -46,7 +46,18 @@
             
             return $all_data;
 
-        } else {
+        }elseif($facID=="all"){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM department");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+    
+                
+                return $all_data;
+        }else {
 
                 $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM department WHERE facID='".$facID."'");
                 $all_data = array();

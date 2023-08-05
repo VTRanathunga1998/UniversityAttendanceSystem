@@ -12,11 +12,17 @@ async function getFaculty() {
 
   var json_data = await response.json();
 
+  // Create "All" option and prepend it to the dropdown
+  var allOption = document.createElement("option");
+  allOption.text = "All";
+  allOption.value = "all";
+  faculty_dropdown.appendChild(allOption);
+
+  // Add options from the database after "All" option
   json_data.forEach((item, index) => {
     var option = document.createElement("option");
     option.text = item.facName;
     option.value = item.facID;
-
     faculty_dropdown.appendChild(option);
   });
 }
@@ -170,8 +176,6 @@ async function getAdmin(facID = null, depID = null) {
   var response = await fetch(url);
 
   var json_data = await response.json();
-
-  console.log(json_data);
 
   json_data.forEach((item) => {
     var card = document.createElement("div");
