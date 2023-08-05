@@ -24,6 +24,11 @@
                     </div>
                     <h2>Automated Attendance System</h2>
                     <h5>Sabaragamuwa University Of Sri Lanka</h5>
+                    <?php
+          if (isset($_SESSION['loginMessage'])) {
+            echo $_SESSION['loginMessage'];
+            unset($_SESSION['loginMessage']);
+          }?>
                 </div>
             </div>
         </div>
