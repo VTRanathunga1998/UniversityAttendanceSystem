@@ -4,7 +4,6 @@ ob_start();
 
 include "../../../../database.php";
 
-
 if (isset($_POST["submit"])) {
     $userName = $_POST["username"];
     $pass = $_POST["password"];
@@ -21,6 +20,8 @@ if (isset($_POST["submit"])) {
         if (password_verify($pass, $hashedPassword)) {
             $_SESSION["loginMessage"] =
                 '<span class="success">Welcome ' . $userName . "</span>";
+            $_SESSION["userName"] = $userName; //changed by wiraj
+
             header(
                 "location: http://localhost/UniversityAttendanceSystem/src/pages/Admin/admin.php"
             );
@@ -43,5 +44,3 @@ if (isset($_POST["submit"])) {
     }
 }
 ob_flush();
-
-?>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +36,7 @@
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">Admin</span>
+			<span class="text"><?php echo $_SESSION["userName"] ?></span>
 		</a>
 		<ul class="side-menu top">
 			<li class=<?php if(isset($isDashboard)){echo "$isDashboard";} ?>>
@@ -98,9 +96,9 @@
 				<i class='bx bxs-bell' ></i>
 				<span class="num">8</span>
 			</a>
-			<a href="#" class="profile">
+			<!-- <a href="#" class="profile">
 				<img src="/UniversityAttendanceSystem/src/Assets/images/people.png">
-			</a>
+			</a> -->
 		</nav>
 		<!-- NAVBAR -->
         <!-- MAIN -->

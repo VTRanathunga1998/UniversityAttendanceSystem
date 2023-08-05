@@ -1,5 +1,11 @@
 <?php
-session_start(); ?>
+session_start();
+
+if (isset($_SESSION["userName"])) {
+    header("Location: ../admin.php");
+    exit();
+}
+?>
 
 <?php include "../../../Components/mainHeader.php"; ?>
 <section class="vh-100">
@@ -23,13 +29,10 @@ session_start(); ?>
                     unset($_SESSION["status"]);
                     unset($_SESSION["state"]);
                     } ?>
-   
-    
 
-    
          <!-- Email input -->
           <div class="form-outline mb-4">
-       
+
             <input type="text" id="username" class="form-control form-control-lg"
               placeholder="Enter a valid User Name" name="username" />
             <label class="form-label" for="username">User Name</label>
@@ -41,7 +44,7 @@ session_start(); ?>
               placeholder="Enter password" name="password" />
             <label class="form-label" for="password">Password</label>
           </div>
-   
+
 
           <div class="d-flex justify-content-between align-items-center">
             <!-- Checkbox -->
@@ -57,7 +60,7 @@ session_start(); ?>
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" class="btn btn-primary btn-lg"
               style="padding-left: 2.5rem; padding-right: 2.5rem;" name="submit" >Login</button>
-          
+
           </div>
 
         </form>

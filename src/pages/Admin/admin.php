@@ -2,6 +2,12 @@
 
   session_start();
 
+  if (!isset($_SESSION["userName"])) {
+    header("Location: login/login.php");
+    exit();
+  }
+
+
   include_once '../../../database.php';
 
   define('BASE_DIR', '../../Components/');

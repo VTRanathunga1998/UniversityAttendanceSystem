@@ -1,10 +1,11 @@
 <?php
 
     session_start();
-    // if(empty($_SESSION['userName'])){
-    //     header("Location:logindenied.php");
-    // }
 
+    if (!isset($_SESSION["userName"])) {
+    header("Location: login/login.php");
+    exit();
+    }
     include '../../../database.php';
 
     if(isset($_POST['newSession'])){

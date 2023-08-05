@@ -1,20 +1,28 @@
 <?php
-  define('BASE_DIR', '../../Components/');
 
-  include_once '../../../database.php';
+session_start();
 
-  // Set page title
-  $page_title = "Setting";
+if (!isset($_SESSION["userName"])) {
+  header("Location: login/login.php");
+  exit();
+}
 
-  //Set the heading
-  $head_title = "Setting";
+define('BASE_DIR', '../../Components/');
 
-  //Sub Title
-  $sub_title = "View student";
+include_once '../../../database.php';
 
-  $isSetting = "active";
-  
-  include BASE_DIR . 'header.php';
+// Set page title
+$page_title = "Setting";
+
+//Set the heading
+$head_title = "Setting";
+
+//Sub Title
+$sub_title = "View student";
+
+$isSetting = "active";
+
+include BASE_DIR . 'header.php';
 ?>
 
 <div class="mb-3 action-bar"style="
@@ -29,41 +37,41 @@
     </a>
   </div>
   <div>
-    <button type="button" class="btn btn-primary button-icon" data-bs-toggle="modal" data-bs-target="#addStudent" style="margin-left:25px;background-image: url('../../Assets/images/icons/add.svg');"> 
+    <button type="button" class="btn btn-primary button-icon" data-bs-toggle="modal" data-bs-target="#addStudent" style="margin-left:25px;background-image: url('../../Assets/images/icons/add.svg');">
     Add student</button>
   </div>
 </div>
 
 <!-- Select faculty -->
-<?php include '../../Components/facultyDropdown.php' ?>
+<?php include '../../Components/facultyDropdown.php'?>
 
 <!-- Select department -->
-<?php include '../../Components/departmentDropdown.php' ?>
+<?php include '../../Components/departmentDropdown.php'?>
 
 <!-- Department card -->
 <div class="row row-cols-1 row-cols-md-3  g-4" id="student-card">
-  <?php 
-    try{
-      // Select data from the "student" table
-      $sql = "SELECT * FROM student";
-      $result = $connect->query($sql);
+  <?php
+try {
+    // Select data from the "student" table
+    $sql = "SELECT * FROM student";
+    $result = $connect->query($sql);
 
-      // Check if there are any rows in the result set
+    // Check if there are any rows in the result set
     if ($result->num_rows > 0) {
-      // Output data of each row
-      while($row = $result->fetch_assoc()) {
-          // Display the data on Bootstrap cards
-          
-        if($row['profilePic'] !== null){
-          $image_src = $row['profilePic'];
-        }else{
-          $image_src = "../../Assets/images/profile.jpg";
-        }
-          echo '<div>
+        // Output data of each row
+        while ($row = $result->fetch_assoc()) {
+            // Display the data on Bootstrap cards
+
+            if ($row['profilePic'] !== null) {
+                $image_src = $row['profilePic'];
+            } else {
+                $image_src = "../../Assets/images/profile.jpg";
+            }
+            echo '<div>
                   <div class="card mb-3 h-100 shadow student-card" style="border:none;">
                   <img
                   class="img-fluid mx-auto d-block"
-                  src='.$image_src.'
+                  src=' . $image_src . '
                   alt="PROFILE PICTURE"
                   style="
                     width: 100px !important;
@@ -74,37 +82,37 @@
                     margin-top: 1rem;
                   "
                 />
-                    <div class="card-body" 
+                    <div class="card-body"
                       style="display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden"
                     >
-                      <div> 
-                        <h5 class="card-title text-center">'. $row["firstName"] .''.' '.''. $row["lastName"] .'</h5>      
-                      </div> 
                       <div>
-                        <h6 class="card-title text-center">'. $row["RegNum"] .'</h6>
+                        <h5 class="card-title text-center">' . $row["firstName"] . '' . ' ' . '' . $row["lastName"] . '</h5>
                       </div>
                       <div>
-                        <a  href="studentProfile.php?stdid='. $row['RegNum'] .'" class="btn btn-primary mt-3">View profile</a >
+                        <h6 class="card-title text-center">' . $row["RegNum"] . '</h6>
+                      </div>
+                      <div>
+                        <a  href="studentProfile.php?stdid=' . $row['RegNum'] . '" class="btn btn-primary mt-3">View profile</a >
                       </div>
                     </div>
                   </div>
                 </div>';
-      }
-      }
-    } catch(mysqli_sql_exception $e){
-      echo "Error";
+        }
     }
+} catch (mysqli_sql_exception $e) {
+    echo "Error";
+}
 
-    // Close the database connection
-    $connect->close();
+// Close the database connection
+$connect->close();
 
-  ?>
-</div> 
+?>
+</div>
 
 <?php
-  include '../../Components/modal.php';
-  include '../../Components/Modals/addStudentModal.php';
-  include  BASE_DIR . 'footertop.php';
+include '../../Components/modal.php';
+include '../../Components/Modals/addStudentModal.php';
+include BASE_DIR . 'footertop.php';
 ?>
 
 <script src="/UniversityAttendanceSystem/src/js/displayCard.js"></script>
@@ -131,5 +139,5 @@
 </script>
 
 <?php
-  include  BASE_DIR . 'footer.php';
+include BASE_DIR . 'footer.php';
 ?>

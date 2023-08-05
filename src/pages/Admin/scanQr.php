@@ -1,8 +1,10 @@
 <?php   
-    session_start();
-    // if(empty($_SESSION['userName'])){
-    //     header("Location:logindenied.php");
-    // }
+      session_start();
+
+      if (!isset($_SESSION["userName"])) {
+        header("Location: login/login.php");
+        exit();
+      }
 
     if(empty($_SESSION['sessionID'])){
         header("Location:admin.php?showModal=true&status=unsuccess&message=The session is not created");
