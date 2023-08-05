@@ -525,11 +525,12 @@ table td {
   display: flex;
   justify-content: center;
   flex-direction: row !important;
+  padding: 5px !important;
+  position: relative;
 }
 
 .scanning-area .scanner {
   flex: 1;
-  /* padding: 7px; */
 }
 
 .scanning-area .student-details {
@@ -538,6 +539,15 @@ table td {
   justify-content: center;
   align-items: flex-start;
   /* padding: 7px; */
+}
+
+.scan-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
 }
 
 /*END SCAN QR*/

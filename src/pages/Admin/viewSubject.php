@@ -117,6 +117,8 @@
     if (showModal === 'true' && status==='success') {
         // show the modal popup
         $('#success').modal('show');
+        //Clear url
+        window.history.replaceState({}, document.title, window.location.pathname);
         // hide the modal popup after 1 seconds
         setTimeout(function(){
         $('#success').modal('hide');

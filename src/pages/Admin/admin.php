@@ -227,8 +227,8 @@
 
 </div>
 
-<div>
-  <canvas class="bg-white rounded shadow mt-3" id="myChart"></canvas>
+<div class="row row-cols-lg-2 mt-2 p-2">
+    <canvas class="bg-white rounded shadow mt-3" id="myBarChart"></canvas>
 </div>
 
 <?php
@@ -256,7 +256,7 @@
     }
     
     // Create the chart
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('myBarChart').getContext('2d');
     var chart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -281,7 +281,9 @@
             }
         }
     });
+    
 </script>
+
 
 <?php
   include  BASE_DIR . 'footer.php';

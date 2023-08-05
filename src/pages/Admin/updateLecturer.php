@@ -29,7 +29,7 @@ if(isset($_POST['updateLecturer'])){
     }else{
         $mobileNum = '';
     }
-    $lecImage = '';
+    $lecImage = null;
 
     if (isset($_FILES['lecPic']) && $_FILES['lecPic']['error'] == 0) {
         // User has uploaded an image
@@ -56,10 +56,6 @@ if(isset($_POST['updateLecturer'])){
             header("Location:viewLecturer.php?showModal=true&status=unsuccess&message=Unsupported file type");
             exit();
         }
-    } else {
-        // File error
-        header("Location:viewLecturer.php?showModal=true&status=unsuccess&message=File error");
-        exit();
     }
 }
 

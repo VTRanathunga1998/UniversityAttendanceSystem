@@ -29,7 +29,7 @@ if(isset($_POST['updateAdmin'])){
     }else{
         $mobileNum = '';
     }
-    $adminImage = '';
+    $adminImage = null;
 
     if (isset($_FILES['adminPic']) && $_FILES['adminPic']['error'] == 0) {
         // User has uploaded an image
@@ -56,11 +56,7 @@ if(isset($_POST['updateAdmin'])){
             header("Location:viewAdmin.php?showModal=true&status=unsuccess&message=Unsupported file type");
             exit();
         }
-    } else {
-        // File error
-        header("Location:viewAdmin.php?showModal=true&status=unsuccess&message=File error");
-        exit();
-    }
+    } 
 }
 
 // To remove previous profile picture from serverside

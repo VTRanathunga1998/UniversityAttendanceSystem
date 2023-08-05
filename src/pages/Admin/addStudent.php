@@ -22,7 +22,7 @@ if(isset($_POST['addStudent'])){
     }else{
         $mobileNum = '';
     }
-    $stdImage = '';
+    $stdImage = null;
 
     if (isset($_FILES['stdPic']) && $_FILES['stdPic']['error'] == 0) {
         // User has uploaded an image
@@ -49,13 +49,7 @@ if(isset($_POST['addStudent'])){
             header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Unsupported file type");
             exit();
         }
-    } else {
-        // File error
-        header("Location:viewStudent.php?showModal=true&status=unsuccess&message=File error");
-        exit();
     }
- 
-
 }
 
 $sql = "SELECT faculty.facName,department.depName FROM faculty INNER JOIN department ON department.facID = faculty.facID WHERE department.depID = ?";
