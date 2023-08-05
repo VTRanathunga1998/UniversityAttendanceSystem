@@ -60,12 +60,7 @@
 			
 		</ul>
 		<ul class="side-menu">
-			<li class=<?php if(isset($isSetting)){echo "$isSetting";} ?>>
-				<a href="/UniversityAttendanceSystem/src/pages/Admin/setting.php">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
+			
 			<li>
 				<a href="/UniversityAttendanceSystem/logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>

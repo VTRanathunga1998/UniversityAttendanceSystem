@@ -214,7 +214,7 @@
   
   <!-- Class card -->
   <div class="col">
-    <div class="card h-100 shadow dash-card" data-clickable="true" data-href="/UniversityAttendanceSystem/src/pages/Admin/viewAdmin.php">
+    <div class="card h-100 shadow dash-card">
       <div class="card-body">
         <div class="cb-left">
         <div>
@@ -288,6 +288,14 @@
         }
     });
     
+</script>
+<script>
+  $(document).ready(() => {
+    $(document.body).on('click', '.card[data-clickable=true]', (e) => {
+      var href = $(e.currentTarget).data('href');
+      window.location = href;
+    });
+  });
 </script>
 
 

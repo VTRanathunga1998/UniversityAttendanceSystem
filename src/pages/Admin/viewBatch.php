@@ -11,15 +11,15 @@
   include_once '../../../database.php';
 
   // Set page title
-  $page_title = "Setting view batches";
+  $page_title = "Dashboard";
 
   //Set the heading
-  $head_title = "Setting";
+  $head_title = "Dashboard";
 
   //Sub Title
   $sub_title = "View batch";
 
-  $isSetting = "active";
+  $isDashboard = "active";
   
   include BASE_DIR . 'header.php';
 ?>
@@ -31,7 +31,7 @@
   justify-content:space-between;
 ">
   <div>
-    <a href="/UniversityAttendanceSystem/src/pages/Admin/Setting.php" class="btn button-icon btn-primary-soft btn-icon-back" >
+    <a href="/UniversityAttendanceSystem/src/pages/Admin/admin.php" class="btn button-icon btn-primary-soft btn-icon-back" >
       Back
     </a>
   </div>
