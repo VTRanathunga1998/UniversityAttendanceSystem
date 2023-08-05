@@ -1,10 +1,7 @@
 <?php
+session_start(); ?>
 
-ob_start();
-
-include '../../../../database.php';?>
-
-<?php include '../../../Components/mainHeader.php' ?>
+<?php include "../../../Components/mainHeader.php"; ?>
 <section class="vh-100">
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -13,24 +10,26 @@ include '../../../../database.php';?>
           class="img-fluid" alt="Sample image">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form action="" method="POST">
-      
+        <form action="loginPhp.php" method="POST">
+        <?php if (
+            isset($_SESSION["status"])
+        ) { ?>  <div class="alert alert-<?php echo $_SESSION[
+      "state"
+  ]; ?> alert-dismissible fade show" role="alert">
+                            <h5><?php echo $_SESSION["status"]; ?></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php
+                    unset($_SESSION["status"]);
+                    unset($_SESSION["state"]);
+                    } ?>
    
-        <?php
-        if (isset($_SESSION['noUser'])) {
-          echo $_SESSION['noUser'];
-          unset($_SESSION['noUser']);
-        }
-        ?>
+    
 
     
          <!-- Email input -->
           <div class="form-outline mb-4">
-            <?php
-          if (isset($_SESSION['loginMessage'])) {
-            echo $_SESSION['loginMessage'];
-            unset($_SESSION['loginMessage']);
-          }?>
+       
             <input type="text" id="username" class="form-control form-control-lg"
               placeholder="Enter a valid User Name" name="username" />
             <label class="form-label" for="username">User Name</label>
@@ -42,6 +41,7 @@ include '../../../../database.php';?>
               placeholder="Enter password" name="password" />
             <label class="form-label" for="password">Password</label>
           </div>
+   
 
           <div class="d-flex justify-content-between align-items-center">
             <!-- Checkbox -->
@@ -71,38 +71,4 @@ include '../../../../database.php';?>
         crossorigin="anonymous"></script>
 </body>
 </html>
-<?php
-if (isset($_POST['submit'])) {
- 
-  $userName = $_POST['username'];
-  $pass = $_POST['password'];
-  $sql = "SELECT * FROM user WHERE userName = '$userName'";
-  $result = mysqli_query($connect, $sql);
-  $count = mysqli_num_rows($result);
 
-  echo $userName;
-
-  if ($count == 1) {
-    echo "========================";
-    // If user exists, fetch the user's hashed password from the database
-    $row = mysqli_fetch_assoc($result);
-    $hashedPassword = $row['password'];
-    echo $hashedPass;
-    // Verify the provided password against the hashed password
-    if (password_verify($pass, $hashedPassword)) {
-      $_SESSION['loginMessage'] = '<span class="success">Welcome ' . $userName . '</span>';
-      header('location: http://localhost/UniversityAttendanceSystem/index.php');
-      exit();
-    } else {
-      $_SESSION['loginMessage'] = '<span class="fail" style="background-color: red; padding: 5px 10px; color: white; border-radius: 5px; display: inline-block;">Incorrect password!</span>';
-      header('location: http://localhost/UniversityAttendanceSystem/src/pages/admin/login/login.php');
-      exit();
-    }
-  } else {
-    $_SESSION['loginMessage'] = '<span class="fail" style="background-color: red; padding: 5px 10px; color: white; border-radius: 5px; display: inline-block;">User not registered!</span>';
-    header('location: http://localhost/gym/register/register.php');
-    exit();
-  }
-}
-ob_flush();
-?>
