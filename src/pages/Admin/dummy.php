@@ -433,3 +433,19 @@ $(document).ready(function () {
     $image_src = "../../Assets/uploads/".$image;
 ?>
 <img src="<?php echo $image_src; ?>" >
+
+
+if(isset($_REQUEST['type'])){
+  if($_REQUEST['type']=="lecturer"){
+            if (isset($_REQUEST['facID']) && isset($_REQUEST['depID'])) {
+                echo json_encode(getLecturer($_REQUEST['facID'], $_REQUEST['depID']));
+            } else if (isset($_REQUEST['facID'])) {
+                echo json_encode(getLecturer($_REQUEST['facID']));
+            } else if (isset($_REQUEST['depID'])) {
+                echo json_encode(getLecturer(null, $_REQUEST['depID']));
+            }
+        }       
+        
+    } else {
+        echo json_encode(getFaculty());
+    }

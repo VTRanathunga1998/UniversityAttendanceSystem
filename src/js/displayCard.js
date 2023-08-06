@@ -79,6 +79,12 @@ async function getDepartment(facID) {
     }
   });
 
+  // Create "All" option and prepend it to the dropdown
+  var allOption = document.createElement("option");
+  allOption.text = "All";
+  allOption.value = "all";
+  department_dropdown.appendChild(allOption);
+
   json_data.forEach((item) => {
     if (department_dropdown !== null) {
       var option = document.createElement("option");
@@ -103,9 +109,13 @@ async function getLecturer(facID = null, depID = null) {
     url += "&depID=" + depID;
   }
 
+  // console.log(url);
+
   var response = await fetch(url);
 
   var json_data = await response.json();
+
+  // console.log(json_data);
 
   json_data.forEach((item) => {
     var card = document.createElement("div");

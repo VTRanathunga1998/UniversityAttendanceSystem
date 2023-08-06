@@ -123,8 +123,11 @@
     // Get lecturer
     function getLecturer($facID = NULL , $depID = NULL){
 
-        if($depID==NULL){
-            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM lecturer WHERE faculty='$facID'");
+        $facID = strtoupper($facID);
+        $depID = strtoupper($depID);
+
+        if( $facID == "ALL" && $depID == NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM lecturer");
             $all_data = array();
 
             while($row=mysqli_fetch_assoc(($query))){
@@ -134,6 +137,53 @@
 
             
             return $all_data;
+
+        }elseif ($facID == "ALL" && $depID == "ALL"){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM lecturer");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                      
+                return $all_data;
+
+        }elseif ($facID !== NULL && $depID == "ALL"){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM lecturer  WHERE faculty='$facID'");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                
+                
+                return $all_data;
+
+        } elseif ($facID !== NULL && $depID == NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM lecturer  WHERE faculty='$facID'");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                
+                
+                return $all_data;
+
+        }elseif($facID == "ALL" && $depID !== NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM lecturer WHERE department='$depID'");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+
+                
+                return $all_data;
 
         } else {
 
@@ -145,7 +195,7 @@
                     // array_push($all_data,$row);
                     $all_data[] = $row;
                 }
-    
+                
                 
                 return $all_data;
     
@@ -155,23 +205,67 @@
     // Get Student
     function getStudent($facID = NULL , $depID = NULL){
 
-        if($depID==NULL){
-            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM student WHERE faculty='$facID'");
+        $facID = strtoupper($facID);
+        $depID = strtoupper($depID);
+
+        if( $facID == "ALL" && $depID == NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM student");
             $all_data = array();
 
             while($row=mysqli_fetch_assoc(($query))){
                 // array_push($all_data,$row);
-                // $profile_picture = null;
-                // if (!empty($row['profilePic'])) {
-                //     $profile_picture = file_get_contents($row['profilePic']);
-                //     $profile_picture = base64_encode($profile_picture);
-                // }
-                // $row['profilePic'] = $profile_picture;
                 $all_data[] = $row;
             }
 
             
             return $all_data;
+
+        }elseif ($facID == "ALL" && $depID == "ALL"){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM student");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                      
+                return $all_data;
+
+        }elseif ($facID !== NULL && $depID == "ALL"){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM student  WHERE faculty='$facID'");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                
+                
+                return $all_data;
+
+        } elseif ($facID !== NULL && $depID == NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM student  WHERE faculty='$facID'");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                
+                
+                return $all_data;
+
+        }elseif($facID == "ALL" && $depID !== NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM student WHERE department='$depID'");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+
+                
+                return $all_data;
 
         } else {
 
@@ -181,59 +275,9 @@
     
                 while($row=mysqli_fetch_assoc(($query))){
                     // array_push($all_data,$row);
-                    // $profile_picture = null;
-                    // if (!empty($row['profilePic'])) {
-                    //     $profile_picture = file_get_contents($row['profilePic']);
-                    //     $profile_picture = base64_encode($profile_picture);
-                    // }
-                    // $row['profilePic'] = $profile_picture;
                     $all_data[] = $row;
                 }
-    
                 
-                return $all_data;
-    
-        }
-    }
-
-    // Get Admin
-    function getAdmin($facID = NULL , $depID = NULL){
-
-        if($depID==NULL){
-            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM admin WHERE faculty='$facID'");
-            $all_data = array();
-
-            while($row=mysqli_fetch_assoc(($query))){
-                // array_push($all_data,$row);
-                // $profile_picture = null;
-                // if (!empty($row['profilePic'])) {
-                //     $profile_picture = file_get_contents($row['profilePic']);
-                //     $profile_picture = base64_encode($profile_picture);
-                // }
-                // $row['profilePic'] = $profile_picture;
-                $all_data[] = $row;
-            }
-
-            
-            return $all_data;
-
-        } else {
-
-                $sql = "SELECT * FROM admin WHERE faculty='$facID' AND department='$depID'";
-                $query = mysqli_query($GLOBALS['connect'],$sql);
-                $all_data = array();
-    
-                while($row=mysqli_fetch_assoc(($query))){
-                    // array_push($all_data,$row);
-                    // $profile_picture = null;
-                    // if (!empty($row['profilePic'])) {
-                    //     $profile_picture = file_get_contents($row['profilePic']);
-                    //     $profile_picture = base64_encode($profile_picture);
-                    // }
-                    // $row['profilePic'] = $profile_picture;
-                    $all_data[] = $row;
-                }
-    
                 
                 return $all_data;
     
