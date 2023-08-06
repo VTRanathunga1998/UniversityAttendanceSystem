@@ -64,6 +64,29 @@ if(isset($_POST['updateLecturer'])){
     }
 }
 
+// To remove profile picture from serverside
+$sql = "SELECT profilePic FROM lecturer WHERE userName=?";
+try {
+    if ($stmt = mysqli_prepare($connect, $sql)) {
+        mysqli_stmt_bind_param($stmt, "s", $preLecId);
+        mysqli_stmt_execute($stmt);
+
+        $result = $stmt->get_result(); // get the mysqli result
+        $lecturer = $result->fetch_assoc();
+
+        $filename = $lecturer['profilePic']; // replace with the path and filename of the file to be deleted
+
+        // Close the statement and the database connection
+        mysqli_stmt_close($stmt);
+
+    } else {
+        throw new Exception(mysqli_error($connect));
+    }
+} catch (Exception $e) {
+    header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Update unsuccessful! " . $e->getMessage());
+}
+
+
 $sql = "SELECT faculty.facName,department.depName FROM faculty INNER JOIN department ON department.facID = faculty.facID WHERE department.depID = ?";
 
 try{
@@ -94,6 +117,18 @@ try{
                             if ($stmt = mysqli_prepare($connect, $sql)) {
                                 mysqli_stmt_bind_param($stmt, "sssssssssss", $lecID, $firstName, $lastName, $gender, $nic, $departmentName, $facultyName, $email, $mobileNum, $lecImage, $lecID);
                                 mysqli_stmt_execute($stmt);
+
+                                if(mysqli_stmt_execute($stmt)){
+                                    if (file_exists($filename)) {
+                                        if (unlink($filename)) {
+                                            echo "File deleted successfully.";
+                                        } else {
+                                            echo "Error deleting file.";
+                                        }
+                                    } else {
+                                        echo "File not found.";
+                                    }
+                                }
                         
                                 // Close the statement and the database connection
                                 mysqli_stmt_close($stmt);

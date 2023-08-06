@@ -36,10 +36,19 @@ async function getDepartmentForAddAdmin(facID) {
   });
 }
 
+// clear department dropdown
+function clearDepartmentDropdownForAddAdmin(department_dropdown_) {
+  if (department_dropdown_ !== null) {
+    // card is set
+    department_dropdown_.innerHTML = ""; // set the innerHTML of the parent node to an empty string
+  }
+}
+
 $(document).ready(function () {
   getFacultyForAddAdmin();
 
   $("#facultyDropdownAddAdmin").change(function () {
+    clearDepartmentDropdownForAddAdmin(department_dropdown_);
     getDepartmentForAddAdmin(faculty_dropdown_.value);
   });
 });

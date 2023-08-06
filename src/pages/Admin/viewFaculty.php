@@ -107,6 +107,9 @@
         setTimeout(function(){
         $('#success').modal('hide');
         }, 1000);
+
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
     });
 </script>

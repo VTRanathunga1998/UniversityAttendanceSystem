@@ -131,15 +131,30 @@
         setTimeout(function(){
         $('#success').modal('hide');
         }, 1000);
+
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
     }else if (showModal === 'true' && status==='viewSubject') {
         // show the modal popup
         $('#studentProfile').modal('show');
+
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
     }else if(showModal === 'true' && status==='editSubject'){
          // show the modal popup
          $('#editSubject').modal('show');
+
+         //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
     }else if(showModal === 'true' && status==='removeSubject'){
         // show the modal popup
         $('#removeSubject').modal('show');
+
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
     });
 </script>

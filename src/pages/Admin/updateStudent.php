@@ -10,7 +10,7 @@ if (!isset($_SESSION["userName"])) {
 include '../../../database.php';
 
 if(isset($_SESSION['oldStdid'])){
-    $preLecId = $_SESSION['oldStdid'];
+    $preStdId = $_SESSION['oldStdid'];
     unset($_SESSION['oldStdid']);
 } else {
     header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Student not found");
@@ -65,6 +65,29 @@ if(isset($_POST['updateStudent'])){
     } 
 }
 
+// To remove profile picture from serverside
+$sql = "SELECT profilePic FROM student WHERE userName=?";
+try {
+    if ($stmt = mysqli_prepare($connect, $sql)) {
+        mysqli_stmt_bind_param($stmt, "s", $preStdId);
+        mysqli_stmt_execute($stmt);
+
+        $result = $stmt->get_result(); // get the mysqli result
+        $student = $result->fetch_assoc();
+
+        $filename = $student['profilePic']; // replace with the path and filename of the file to be deleted
+
+        // Close the statement and the database connection
+        mysqli_stmt_close($stmt);
+
+    } else {
+        throw new Exception(mysqli_error($connect));
+    }
+} catch (Exception $e) {
+    header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Delete unsuccessful! " . $e->getMessage());
+}
+
+
 $sql = "SELECT faculty.facName,department.depName FROM faculty INNER JOIN department ON department.facID = faculty.facID WHERE department.depID = ?";
 
 try{
@@ -83,7 +106,7 @@ try{
                 $sql = "UPDATE user SET userName=? WHERE userName=? AND role='Student' ";
                 try {
                     if ($stmt = mysqli_prepare($connect, $sql)) {
-                        mysqli_stmt_bind_param($stmt, "ss", $stdID, $preLecId);
+                        mysqli_stmt_bind_param($stmt, "ss", $stdID, $preStdId);
                         mysqli_stmt_execute($stmt);
                 
                         // Close the statement and the database connection
@@ -94,8 +117,19 @@ try{
                         try {
                             if ($stmt = mysqli_prepare($connect, $sql)) {
                                 mysqli_stmt_bind_param($stmt, "ssssssssssss", $stdID, $firstName, $lastName, $gender, $nic, $departmentName, $facultyName, $email, $batch, $mobileNum, $stdImage, $stdID);
-                                mysqli_stmt_execute($stmt);
-                        
+
+                                if(mysqli_stmt_execute($stmt)){
+                                    if (file_exists($filename)) {
+                                        if (unlink($filename)) {
+                                            echo "File deleted successfully.";
+                                        } else {
+                                            echo "Error deleting file.";
+                                        }
+                                    } else {
+                                        echo "File not found.";
+                                    }
+                                }
+                                                            
                                 // Close the statement and the database connection
                                 mysqli_stmt_close($stmt);
                                 mysqli_close($connect);

@@ -131,9 +131,16 @@
         setTimeout(function(){
         $('#success').modal('hide');
         }, 1000);
+
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
     }else if (showModal === 'true' && status==='viewAdmin') {
         // show the modal popup
         $('#adminProfile').modal('show');
+
+        //jQuery code to clear URL parameters on modal close with delay
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
     });
 </script>
