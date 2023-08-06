@@ -100,14 +100,15 @@ try{
                                 mysqli_close($connect);
                         
                                 header("Location:viewLecturer.php?showModal=true&status=success&message=Lecturer updated successfully");
+                                exit;
                             } else {
                                 throw new Exception(mysqli_error($connect));
                             }
                         } catch (Exception $e) {
                             header("Location:viewLecturer.php?showModal=true&status=unsuccess&message=Update unsuccessful! " . $e->getMessage());
+                            exit;
                         }
                 
-
                     } else {
                         throw new Exception(mysqli_error($connect));
                     }

@@ -5,6 +5,25 @@ var studentcard = document.getElementById("student-card");
 var lecturercard = document.getElementById("lecturer-card");
 var adminCard = document.getElementById("admin-card");
 
+//check file exisence
+async function checkFilesExistence(filePaths) {
+  const url = `check_files.php?filePaths=${filePaths}`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    return {};
+  }
+}
+
 async function getFaculty() {
   var response = await fetch(
     "http://localhost/UniversityAttendanceSystem/api_data.php"
@@ -109,16 +128,21 @@ async function getLecturer(facID = null, depID = null) {
     url += "&depID=" + depID;
   }
 
-  // console.log(url);
-
   var response = await fetch(url);
-
   var json_data = await response.json();
 
-  // console.log(json_data);
+  // Create a comma-separated list of file paths to check
+  var fileToCheck = json_data.map((item) => item.profilePic).join(",");
 
-  json_data.forEach((item) => {
+  // Call the checkFilesExistence function
+  const existsResult = await checkFilesExistence(fileToCheck);
+
+  json_data.forEach(async (item) => {
     var card = document.createElement("div");
+
+    var profPic = existsResult[item.profilePic]
+      ? item.profilePic
+      : "http://localhost/UniversityAttendanceSystem/src/Assets/images/profile.jpg";
 
     // Create the card HTML structure
     var cardHtml = `
@@ -126,11 +150,7 @@ async function getLecturer(facID = null, depID = null) {
               <div class="card mb-3 h-100 shadow lecturer-card" style="border:none;">
               <img
               class="img-fluid mx-auto d-block"
-              src=${
-                item.profilePic
-                  ? item.profilePic
-                  : "/UniversityAttendanceSystem/src/Assets/images/profile.jpg"
-              }
+              src=${profPic}
               alt="PROFILE PICTURE"
               style="
                 width: 100px !important;
@@ -145,17 +165,13 @@ async function getLecturer(facID = null, depID = null) {
                   style="display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden"
                 >
                   <div> 
-                    <h5 class="card-title text-center">${item.firstName} ${
-      item.lastName
-    }</h5>      
+                    <h5 class="card-title text-center">${item.firstName} ${item.lastName}</h5>      
                   </div> 
                   <div>
                     <h6 class="card-title text-center">${item.lecturerID}</h6>
                   </div>
                   <div>
-                        <a  href="lecturerProfile.php?lecid=${
-                          item.lecturerID
-                        }" class="btn btn-primary mt-3">View profile</a >
+                        <a  href="lecturerProfile.php?lecid=${item.lecturerID}" class="btn btn-primary mt-3">View profile</a >
                   </div>
                 </div>
               </div>
@@ -187,8 +203,18 @@ async function getAdmin(facID = null, depID = null) {
 
   var json_data = await response.json();
 
+  // Create a comma-separated list of file paths to check
+  var fileToCheck = json_data.map((item) => item.profilePic).join(",");
+
+  // Call the checkFilesExistence function
+  const existsResult = await checkFilesExistence(fileToCheck);
+
   json_data.forEach((item) => {
     var card = document.createElement("div");
+
+    var profPic = existsResult[item.profilePic]
+      ? item.profilePic
+      : "http://localhost/UniversityAttendanceSystem/src/Assets/images/profile.jpg";
 
     // Create the card HTML structure
     var cardHtml = `
@@ -196,11 +222,7 @@ async function getAdmin(facID = null, depID = null) {
               <div class="card mb-3 h-100 shadow admin-card" style="border:none;">
               <img
               class="img-fluid mx-auto d-block"
-              src=${
-                item.profilePic
-                  ? item.profilePic
-                  : "/UniversityAttendanceSystem/src/Assets/images/profile.jpg"
-              }
+              src=${profPic}
               alt="PROFILE PICTURE"
               style="
                 width: 100px !important;
@@ -215,17 +237,13 @@ async function getAdmin(facID = null, depID = null) {
                   style="display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden"
                 >
                   <div> 
-                    <h5 class="card-title text-center">${item.firstName} ${
-      item.lastName
-    }</h5>      
+                    <h5 class="card-title text-center">${item.firstName} ${item.lastName}</h5>      
                   </div> 
                   <div>
                     <h6 class="card-title text-center">${item.adminID}</h6>
                   </div>
                   <div>
-                        <a  href="adminProfile.php?adminid=${
-                          item.adminID
-                        }" class="btn btn-primary mt-3">View profile</a >
+                        <a  href="adminProfile.php?adminid=${item.adminID}" class="btn btn-primary mt-3">View profile</a >
                   </div>
                 </div>
               </div>
@@ -257,8 +275,18 @@ async function getStudent(facID = null, depID = null) {
 
   var json_data = await response.json();
 
+  // Create a comma-separated list of file paths to check
+  var fileToCheck = json_data.map((item) => item.profilePic).join(",");
+
+  // Call the checkFilesExistence function
+  const existsResult = await checkFilesExistence(fileToCheck);
+
   json_data.forEach((item) => {
     var card = document.createElement("div");
+
+    var profPic = existsResult[item.profilePic]
+      ? item.profilePic
+      : "http://localhost/UniversityAttendanceSystem/src/Assets/images/profile.jpg";
 
     // Create the card HTML structure
     var cardHtml = `
@@ -266,7 +294,7 @@ async function getStudent(facID = null, depID = null) {
                   <div class="card mb-3 h-100 shadow student-card" style="border:none; ">
                   <img
                     class="img-fluid mx-auto d-block"
-                    src=${item.profilePic}
+                    src=${profPic}
                     alt="PROFILE PICTURE"
                     style="
                       width: 100px !important;

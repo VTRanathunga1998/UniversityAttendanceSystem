@@ -70,7 +70,7 @@
 
     ">
       <img src=<?php 
-        if($row['profilePic'] !==null ){
+        if($row['profilePic'] && file_exists($row['profilePic']) ){
           echo $row['profilePic']; 
         }else{
           echo "../../Assets/images/profile.jpg";

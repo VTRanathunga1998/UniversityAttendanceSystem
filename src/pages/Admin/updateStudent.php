@@ -35,7 +35,7 @@ if(isset($_POST['updateStudent'])){
     }else{
         $mobileNum = '';
     }
-    $lecImage = null;
+    $stdImage = null;
 
     if (isset($_FILES['stdPic']) && $_FILES['stdPic']['error'] == 0) {
         // User has uploaded an image
@@ -51,7 +51,7 @@ if(isset($_POST['updateStudent'])){
     
             if (move_uploaded_file($tempName, $uploadPath)) {
                 // Image has been successfully uploaded
-                $lecImage = $uploadPath;
+                $stdImage = $uploadPath;
             } else {
                 // Error uploading the image
                 header("Location:viewStudent.php?showModal=true&status=unsuccess&message=Error uploading image");
@@ -93,7 +93,7 @@ try{
 
                         try {
                             if ($stmt = mysqli_prepare($connect, $sql)) {
-                                mysqli_stmt_bind_param($stmt, "ssssssssssss", $stdID, $firstName, $lastName, $gender, $nic, $departmentName, $facultyName, $email, $batch, $mobileNum, $lecImage, $stdID);
+                                mysqli_stmt_bind_param($stmt, "ssssssssssss", $stdID, $firstName, $lastName, $gender, $nic, $departmentName, $facultyName, $email, $batch, $mobileNum, $stdImage, $stdID);
                                 mysqli_stmt_execute($stmt);
                         
                                 // Close the statement and the database connection

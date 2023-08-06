@@ -72,7 +72,7 @@ if (!isset($_SESSION["userName"])) {
 
     ">
       <img src=<?php 
-        if($row['profilePic']){
+        if($row['profilePic']  && file_exists($row['profilePic'])){
           echo $row['profilePic']; 
         }else{
           echo "../../Assets/images/profile.jpg";

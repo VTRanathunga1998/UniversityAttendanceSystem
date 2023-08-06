@@ -62,7 +62,7 @@
       while($row = $result->fetch_assoc()) {
           // Display the data on Bootstrap cards
           
-        if(isset($row['profilePic'])){
+        if(isset($row['profilePic']) && file_exists($row['profilePic'])){
           $image_src = $row['profilePic'];
         }else{
           $image_src = "../../Assets/images/profile.jpg";

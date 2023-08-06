@@ -284,6 +284,88 @@
         }
     }
 
+    // Get Admin
+    function getAdmin($facID = NULL , $depID = NULL){
+
+        $facID = strtoupper($facID);
+        $depID = strtoupper($depID);
+
+        if( $facID == "ALL" && $depID == NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM admin");
+            $all_data = array();
+
+            while($row=mysqli_fetch_assoc(($query))){
+                // array_push($all_data,$row);
+                $all_data[] = $row;
+            }
+
+            
+            return $all_data;
+
+        }elseif ($facID == "ALL" && $depID == "ALL"){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM admin");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                      
+                return $all_data;
+
+        }elseif ($facID !== NULL && $depID == "ALL"){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM admin  WHERE faculty='$facID'");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                
+                
+                return $all_data;
+
+        } elseif ($facID !== NULL && $depID == NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM admin  WHERE faculty='$facID'");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                
+                
+                return $all_data;
+
+        }elseif($facID == "ALL" && $depID !== NULL){
+            $query = mysqli_query($GLOBALS['connect'],"SELECT * FROM admin WHERE department='$depID'");
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+
+                
+                return $all_data;
+
+        } else {
+
+                $sql = "SELECT * FROM admin WHERE faculty='$facID' AND department='$depID'";
+                $query = mysqli_query($GLOBALS['connect'],$sql);
+                $all_data = array();
+    
+                while($row=mysqli_fetch_assoc(($query))){
+                    // array_push($all_data,$row);
+                    $all_data[] = $row;
+                }
+                
+                
+                return $all_data;
+    
+        }
+    }
+
    
     if(isset($_REQUEST['type'])){
         if($_REQUEST['type']=="department"){
