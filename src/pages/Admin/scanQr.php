@@ -91,7 +91,7 @@
                     if(isset($profilePic) && $profilePic !== null){
                         echo '
                             <img class="img-fluid mx-auto d-block"
-                            src="data:image/jpeg;base64,'.base64_encode( $profilePic ).'"
+                            src=src=' . $profilePic . '
                             alt="PROFILE PICTURE"
                             style="
                                 width: 30% !important;
