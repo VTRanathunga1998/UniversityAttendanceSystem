@@ -11,21 +11,27 @@ if (isset($_POST["submit"])) {
     $result = mysqli_query($connect, $sql);
     $count = mysqli_num_rows($result);
 
-    echo $userName;
 
     if ($count == 1) {
         $row = mysqli_fetch_assoc($result);
         $hashedPassword = $row["password"];
 
         if (password_verify($pass, $hashedPassword)) {
-            $_SESSION["loginMessage"] =
-                '<span class="success">Welcome ' . $userName . "</span>";
-            $_SESSION["userName"] = $userName; //changed by wiraj
+             
+            if($row["role"] == "Admin"){
+                $_SESSION["userName"] = $userName;
+                header(
+                    "location: http://localhost/UniversityAttendanceSystem/src/pages/Admin/admin.php"
+                );
+                exit();
+            }else{
+                header(
+                    "location: http://localhost/UniversityAttendanceSystem/Errors/404.php"
+                );
+                exit();
+            }
 
-            header(
-                "location: http://localhost/UniversityAttendanceSystem/src/pages/Admin/admin.php"
-            );
-            exit();
+            
         } else {
             $_SESSION["status"] = "Password is mismatch";
             $_SESSION["state"] = "danger";
