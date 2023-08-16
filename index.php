@@ -16,7 +16,7 @@ if (isset($_SESSION["userName"])) {
                     <div class="clearfix">
                         <img src="src/Assets/images/SUSL_logo.png" class="rounded mx-auto d-block img-fluid" alt="SUSL">
                     </div>
-                    <h2>Automated Attendance System</h2>
+                    <h2>Automated Attendance System </h2>
                     <h5>Sabaragamuwa University Of Sri Lanka</h5>
                 </div>
             </div>
