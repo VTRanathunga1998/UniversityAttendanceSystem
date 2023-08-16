@@ -31,19 +31,21 @@ async function getFaculty() {
 
   var json_data = await response.json();
 
-  // Create "All" option and prepend it to the dropdown
-  var allOption = document.createElement("option");
-  allOption.text = "All";
-  allOption.value = "all";
-  faculty_dropdown.appendChild(allOption);
+  if (faculty_dropdown) {
+    // Create "All" option and prepend it to the dropdown
+    var allOption = document.createElement("option");
+    allOption.text = "All";
+    allOption.value = "all";
+    faculty_dropdown.appendChild(allOption);
 
-  // Add options from the database after "All" option
-  json_data.forEach((item, index) => {
-    var option = document.createElement("option");
-    option.text = item.facName;
-    option.value = item.facID;
-    faculty_dropdown.appendChild(option);
-  });
+    // Add options from the database after "All" option
+    json_data.forEach((item, index) => {
+      var option = document.createElement("option");
+      option.text = item.facName;
+      option.value = item.facID;
+      faculty_dropdown.appendChild(option);
+    });
+  }
 }
 
 // Get gepartment
@@ -86,7 +88,7 @@ async function getDepartment(facID) {
     footerButton.style.cssText = "cursor:pointer;";
     footerButton.textContent = "See more...";
 
-    if (card !== null) {
+    if (card) {
       // department_dropdown is set
       card.appendChild(cardElementRoot);
       cardElementRoot.appendChild(cardElement);
@@ -98,21 +100,20 @@ async function getDepartment(facID) {
     }
   });
 
-  // Create "All" option and prepend it to the dropdown
-  var allOption = document.createElement("option");
-  allOption.text = "All";
-  allOption.value = "all";
-  department_dropdown.appendChild(allOption);
+  if (department_dropdown) {
+    var allOption = document.createElement("option");
+    allOption.text = "All";
+    allOption.value = "all";
+    department_dropdown.appendChild(allOption);
 
-  json_data.forEach((item) => {
-    if (department_dropdown !== null) {
+    json_data.forEach((item) => {
       var option = document.createElement("option");
       option.value = item.depID;
       option.text = item.depName;
 
       department_dropdown.appendChild(option);
-    }
-  });
+    });
+  }
 }
 
 //Get Lecturer

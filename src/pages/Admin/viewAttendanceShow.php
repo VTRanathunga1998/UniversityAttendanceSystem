@@ -1,4 +1,5 @@
 <?php
+session_start();
 define('BASE_DIR', '../../Components/');
 
 //include database

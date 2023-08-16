@@ -289,6 +289,8 @@
     });
     
 </script>
+
+
 <script>
   $(document).ready(() => {
     $(document.body).on('click', '.card[data-clickable=true]', (e) => {
