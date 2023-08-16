@@ -66,7 +66,7 @@
                       <h5 class="card-title text-center">'. $row["depName"] .'</h5>      
                     </div>
                     <div class="card-footer text-center" style="border:none">
-                      <a href="#" class="link-primary">See more...</a>      
+                    <a  href="departmentDetails.php?depid='. $row['depID'] .'" class="btn btn-primary mt-3">View department</a >
                     </div>
                   </div>
                 </div>';
