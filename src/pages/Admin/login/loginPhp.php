@@ -20,10 +20,20 @@ if (isset($_POST["submit"])) {
              
             if($row["role"] == "Admin"){
                 $_SESSION["userName"] = $userName;
-                header(
-                    "location: http://localhost/UniversityAttendanceSystem/src/pages/Admin/admin.php"
-                );
-                exit();
+                
+                if($row["verified"] == 0){
+                    header(
+                        "location: http://localhost/UniversityAttendanceSystem/resetPassword.php"
+                    );
+                    exit();
+                }else{
+                    header(
+                        "location: http://localhost/UniversityAttendanceSystem/src/pages/Admin/admin.php"
+                    );
+                    exit();
+                }
+
+
             }else{
                 header(
                     "location: http://localhost/UniversityAttendanceSystem/Errors/404.php"
@@ -49,4 +59,5 @@ if (isset($_POST["submit"])) {
         exit();
     }
 }
+
 ob_flush();

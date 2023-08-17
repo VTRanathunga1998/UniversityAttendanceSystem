@@ -69,6 +69,21 @@ body.dark > span {
   padding: 8px 20px 8px 40px;
 }
 
+.btn-icon-viewSession {
+  padding-left: 40px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: #d8ebfa;
+  background-image: url("/UniversityAttendanceSystem/src/Assets/images/icons/view-iceblue.svg");
+  color: #1969aa;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.btn-icon-viewSession:hover {
+  background-image: url("/UniversityAttendanceSystem/src/Assets/images/icons/view-white.svg");
+}
+
 .btn-primary-soft {
   background-color: #d8ebfa !important;
   color: #1969aa !important;
@@ -663,16 +678,16 @@ table td {
 /*login*/
 .divider:after,
 .divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
 }
 .h-custom {
-height: calc(100% - 73px);
+  height: calc(100% - 73px);
 }
 @media (max-width: 450px) {
-.h-custom {
-height: 100%;
-}
+  .h-custom {
+    height: 100%;
+  }
 }

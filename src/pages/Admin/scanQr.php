@@ -28,7 +28,7 @@
 
                 while($row = mysqli_fetch_assoc($result)){
                     $studentName = $row['firstName'] ." ". $row['lastName'];
-                    $profilePic = @$row['profilePic'];
+                    $profilePic = $row['profilePic'];
                 }
 
 
@@ -88,16 +88,17 @@
             
             <?php 
                 try{
-                    if(isset($profilePic) && $profilePic !== null){
+                    if(isset($profilePic) && file_exists($profilePic)){
                         echo '
                             <img class="img-fluid mx-auto d-block"
-                            src=src=' . $profilePic . '
+                            src=' . $profilePic . '
                             alt="PROFILE PICTURE"
                             style="
-                                width: 30% !important;
+                                width: 100px !important;
+                                height: 100px !important;
                                 border-radius: 50%;
                                 transition: all 0.3s;
-                                margin:auto;
+                                margin: auto;
                                 margin-top: 1rem;
                             "
                             />';
@@ -107,16 +108,18 @@
                         src="/UniversityAttendanceSystem/src/Assets/images/profile.jpg"
                         alt="PROFILE PICTURE"
                         style="
-                            width: 30% !important;
+                            width: 100px !important;
+                            height: 100px !important;
                             border-radius: 50%;
                             transition: all 0.3s;
-                            margin:auto;
+                            margin: auto;
                             margin-top: 1rem;
                         "
                         />';
                     }
                 } catch(Exception $e){
                     header("Location:scanQr.php?showModal=true&status=unsuccess&message=something went wrong");
+                    exit;
                 }
             ?>
 

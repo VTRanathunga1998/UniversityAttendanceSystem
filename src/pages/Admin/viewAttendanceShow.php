@@ -105,9 +105,9 @@ include BASE_DIR . 'header.php';
     </button>
   </div>
   <div>
-    <button type="button" class="btn btn-primary-soft button-icon"
+    <button type="button" class="btn btn-primary-soft btn-icon-viewSession button-icon"
       data-bs-toggle="modal" data-bs-target="#sessionView"
-      style="padding-left: 40px;padding-top: 8px;padding-bottom: 8px; background-color: #D8EBFA; background-image: url('../../Assets/images/icons/view-iceblue.svg'); color:#1969AA; font-weight: 500; font-size: 16px;"
+      
       >
       View Session
   </button>
