@@ -41,7 +41,7 @@
     Add faculty</button>
   </div>
 </div>
-
+<div class="flex row row-cols-1 row-cols-md-3 g-4 justify-content-center justify-content-md-between" id="faculty-card">
 <?php
   try{
     // Select data from the "faculty" table
@@ -61,15 +61,13 @@
 
 
         // Display the data on Bootstrap cards
-        echo '<div class="card mb-3 h-100 shadow faculty-card" style="
-                border:none;
-              ">
-                <img src='.$image_src.' class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h4 class="card-title">'. $row["facName"] .'</h4>
-                  <p class="card-text">'. substr($row["description"],0,100).'...<a href='.$row['email'].' target="_blank">See more</a> </p>
-                </div>
-              </div>';
+        echo '<div class="card g-4" style="width: 20rem;">
+        <img src='.$image_src.' class="card-img-top" alt="...">
+        <div class="card-body" >
+          <h5 class="card-title text-center">'. $row["facName"] .'</h5>
+          <p class="card-text text-center" style="padding-top: 20px; padding-bottom: 20px;">'. substr($row["description"],0,100).'...<a href='.$row['email'].' target="_blank">See more</a></p>
+        </div>
+      </div>';
     }
     } else {
       echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -87,7 +85,7 @@
 
 ?>
 
-
+</div>
 
 <?php
   include '../../Components/modal.php';

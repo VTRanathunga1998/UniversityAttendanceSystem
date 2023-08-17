@@ -59,7 +59,7 @@
       // Output data of each row
       while($row = $result->fetch_assoc()) {
           // Display the data on Bootstrap cards
-          echo '<div>
+          echo '
                   <div class="card mb-3 h-100 shadow department-card" style="border:none;">
                     <img src="/UniversityAttendanceSystem/src/Assets/images/university.jpg" class="card-img-top" alt="...">
                     <div class="card-body" style="display:flex; align-items:center; justify-content:center;">
@@ -69,12 +69,15 @@
                     <a  href="departmentDetails.php?depid='. $row['depID'] .'" class="btn btn-primary mt-3">View department</a >
                     </div>
                   </div>
-                </div>';
+                ';
       }
     } 
 
     } catch(mysqli_sql_exception $e){
-      echo "Error";
+      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+      0 Results
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>';
     }
 
     // Close the database connection
