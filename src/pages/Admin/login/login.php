@@ -54,7 +54,7 @@ if (isset($_SESSION["userName"])) {
                 Remember me
               </label>
             </div>
-            <a href="#!" class="text-body">Forgot password?</a>
+        
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">
