@@ -47,7 +47,7 @@
 <?php include '../../Components/facultyDropdown.php' ?>
 
 <!-- Department card -->
-<div class="row row-cols-1 row-cols-md-3  g-4" id="department-card">
+<div class="d-flex flex-wrap" id="department-card">
   <?php 
     try{
       // Select data from the "department" table
@@ -60,7 +60,7 @@
       while($row = $result->fetch_assoc()) {
           // Display the data on Bootstrap cards
           echo '
-                  <div class="card mb-3 h-100 shadow department-card" style="border:none;">
+          <div class="card g-4" style="width: calc(33.33% - 20px); margin-right: 20px; margin-bottom: 20px;">
                     <img src="/UniversityAttendanceSystem/src/Assets/images/university.jpg" class="card-img-top" alt="...">
                     <div class="card-body" style="display:flex; align-items:center; justify-content:center;">
                       <h5 class="card-title text-center">'. $row["depName"] .'</h5>      

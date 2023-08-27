@@ -111,6 +111,13 @@ include BASE_DIR . 'header.php';
       >
       View Session
   </button>
+  <a href="generate_pdf.php?sessionID=<?php echo $sessionID ?>"  
+   type="button" 
+   class="btn btn-primary-soft" 
+   style="padding-top: 12px;padding-bottom: 12px;"
+> 
+   Dowload Report
+</a>
   </div>
 </div>
 

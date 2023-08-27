@@ -41,51 +41,64 @@
     Add faculty</button>
   </div>
 </div>
-<div class="flex row row-cols-1 row-cols-md-3 g-4 justify-content-center justify-content-md-between" id="faculty-card">
+<div class="d-flex flex-wrap" id="faculty-card">
 <?php
-  try{
+  try {
     // Select data from the "faculty" table
     $sql = "SELECT * FROM faculty";
     $result = $connect->query($sql);
 
     // Check if there are any rows in the result set
-  if ($result->num_rows > 0) {
-    // Output data of each row
-    while($row = $result->fetch_assoc()) {
+    if ($result->num_rows > 0) {
+      // Counter to keep track of cards in the current row
+      $cardCount = 0;
 
-        if(isset($row['facPic'])){
+      // Output data of each row
+      while ($row = $result->fetch_assoc()) {
+        if (isset($row['facPic'])) {
           $image_src = $row['facPic'];
-        }else{
+        } else {
           $image_src = "../../Assets/images/university.jpg";
         }
 
-
         // Display the data on Bootstrap cards
-        echo '<div class="card g-4" style="width: 20rem;">
-        <img src='.$image_src.' class="card-img-top" alt="...">
-        <div class="card-body" >
-          <h5 class="card-title text-center">'. $row["facName"] .'</h5>
-          <p class="card-text text-center" style="padding-top: 20px; padding-bottom: 20px;">'. substr($row["description"],0,100).'...<a href='.$row['email'].' target="_blank">See more</a></p>
-        </div>
-      </div>';
-    }
+        echo '<div class="card g-4" style="width: calc(33.33% - 20px); margin-right: 20px; margin-bottom: 20px;">
+          <img src='.$image_src.' class="card-img-top" alt="...">
+          <div class="card-body" >
+            <h5 class="card-title text-center">'. $row["facName"] .'</h5>
+            <p class="card-text text-center" style="padding-top: 20px; padding-bottom: 20px;">'. substr($row["description"],0,100).'...<a href='.$row['email'].' target="_blank">See more</a></p>
+          </div>
+        </div>';
+
+        // Increment the card count
+        $cardCount++;
+
+        // Check if three cards are displayed in the current row
+        if ($cardCount >= 3) {
+          echo '</div><div class="d-flex flex-wrap" id="faculty-card">';
+          $cardCount = 0;
+        }
+      }
+
+      // Close any remaining open row
+      if ($cardCount > 0) {
+        echo '</div>';
+      }
     } else {
       echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
               0 Results
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
     }
-
-  } catch(mysqli_sql_exception $e){
+  } catch (mysqli_sql_exception $e) {
     echo "Error";
   }
 
   // Close the database connection
   $connect->close();
-
 ?>
-
 </div>
+
 
 <?php
   include '../../Components/modal.php';
