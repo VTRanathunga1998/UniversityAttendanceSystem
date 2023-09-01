@@ -80,6 +80,17 @@ body.dark > span {
   font-size: 16px;
 }
 
+.btn-icon-downloadReport {
+  padding-left: 40px;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  background-color: #d8ebfa;
+
+  color: #1969aa;
+  font-weight: 500;
+  font-size: 16px;
+}
+
 .btn-icon-viewSession:hover {
   background-image: url("/UniversityAttendanceSystem/src/Assets/images/icons/view-white.svg");
 }
